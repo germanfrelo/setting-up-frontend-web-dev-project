@@ -1,5 +1,17 @@
 # Setting up a front-end web dev project
 
+
+## Table of Contents
+
+- [EditorConfig](#editorconfig)
+- [Git](#git)
+- [Node.js + npm](#nodejs--npm)
+- [Node.js package](#nodejs-package)
+- [ESLint](#eslint)
+- [Stylelint](#stylelint)
+- [Prettier](#prettier)
+
+
 ## EditorConfig
 
 ### Configuration
@@ -33,7 +45,6 @@ trim_trailing_whitespace = true
 indent_style = tab
 ```
 
----
 
 ## Git
 
@@ -59,7 +70,7 @@ git init
 
 ### 4. Ignoring files
 
-1. Create a `**.gitignore**` file in the **root of the repository**.
+1. Create a **`.gitignore`** file in the **root of the repository**.
 2. Go to [gitignore.io](http://gitignore.io) to get templates specific for the project (e.g. `node, react`) and add the generated content into the `.gitignore` file. Example:
 
     ```gitignore
@@ -88,7 +99,7 @@ git init
 
     On summary, this is to assure that text files will use `LF` (and never `CRLF`) in the *remote* copy of your code.
 
-1. **Create** a `**.gitattributes**` file in the **root of the repository** and add this content:
+1. **Create** a **`.gitattributes`** file in the **root of the repository** and add this content:
 
     ```gitattributes
     # Normalize line endings of all text files checked into the repo with LF.
@@ -117,20 +128,23 @@ git init
     ```
 
     For text files, you should see something like this:
+    
+    On macOS:
 
     ```sh
-    i/lf    w/**crlf**  attr/text=auto  file.txt
+    i/lf    w/lf  attr/text=auto  file.txt
     ```
 
+    On Windows:
+
     ```sh
-    i/lf    w/**lf**  attr/text=auto  file.txt
+    i/lf    w/crlf  attr/text=auto  file.txt
     ```
 
     Git Line Endings: Working Tree vs. Index
 
     The `text` attribute doesn't change line endings for the **local copies** of your text files (i.e., the ones in Git's working tree)—it only changes line endings for files in the repo. The text files you just renormalized may still continue to use `CRLF` locally (on your file system) if that's the line ending with which they were originally created/cloned on your system.
 
----
 
 ## Node.js + npm
 
@@ -138,9 +152,18 @@ Download and install Node.js and npm (npm is included in Node.js).
 
 ℹ️ If **Node.js and npm** are already installed using **nvm**, skip this section.
 How to verify it:
-`command -v nvm
+
+```sh
+command -v nvm
+```
+
+```sh
 node -v
-npm -v`
+```
+
+```sh
+npm -v
+```
 
 [Downloading and installing Node.js and npm | npm Docs](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
@@ -196,7 +219,6 @@ npm -v`
         nvm ls
         ```
 
----
 
 ## Node.js package
 
@@ -236,7 +258,6 @@ This creates a `package.json` file like this:
 }
 ```
 
----
 
 ## ESLint
 
@@ -256,7 +277,7 @@ Verify that ESLint is added as an entry to the `"devDependencies"` attribute of 
 
 ```json
 "devDependencies": {
-        "eslint": "^X.X.X"
+    "eslint": "^X.X.X"
 }
 ```
 
@@ -273,31 +294,31 @@ Replace its content with this:
 
 ```json
 {
-        "env": {
-                "browser": true,
-                "es2021": true,
-                "node": true
-        },
-        "extends": "eslint:recommended",
-        "parserOptions": {
-                "ecmaVersion": "latest"
-        },
-        "rules": {
-                "eol-last": [
-                        "error",
-                        "never"
-                ],
-                "indent": [
-                        "error",
-                        "tab",
-                        {
-                                "SwitchCase": 1
-                        }
-                ],
-                "linebreak-style": ["error", "unix"],
-                "quotes": ["error", "double"],
-                "semi": ["error", "never"]
-        }
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "eol-last": [
+            "error",
+            "never"
+        ],
+        "indent": [
+            "error",
+            "tab",
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "double"],
+        "semi": ["error", "never"]
+    }
 }
 ```
 
@@ -320,7 +341,7 @@ Replace its content with this:
 
     ```json
     "scripts": {
-            "lint:js": "eslint ."
+        "lint:js": "eslint ."
     }
     ```
 
@@ -336,7 +357,6 @@ Replace its content with this:
 
     [ESLint - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
----
 
 ## Stylelint
 
@@ -358,8 +378,8 @@ Verify that Stylelint and its standard configuration are added as entries to the
 
 ```json
 "devDependencies": {
-        "stylelint": "^X.X.X",
-        "stylelint-config-standard": "^X.X.X"
+    "stylelint": "^X.X.X",
+    "stylelint-config-standard": "^X.X.X"
 }
 ```
 
@@ -375,9 +395,9 @@ Add the following content to the `.stylelintrc.json` to *extend* the standard co
 
 ```json
 {
-        "extends": [
-                "stylelint-config-standard"
-        ]
+    "extends": [
+        "stylelint-config-standard"
+    ]
 }
 ```
 
@@ -397,7 +417,7 @@ Add the following content to the `.stylelintrc.json` to *extend* the standard co
 
     ```json
     "devDependencies": {
-            "stylelint-config-recess-order": "^X.X.X"
+        "stylelint-config-recess-order": "^X.X.X"
     }
     ```
 
@@ -464,7 +484,7 @@ Add the following content to the `.stylelintrc.json` to *extend* the standard co
 
     ```json
     "scripts": {
-            "lint:css": "npx stylelint \"**/*.css\" --formatter verbose"
+        "lint:css": "npx stylelint \"**/*.css\" --formatter verbose"
     }
     ```
 
@@ -480,7 +500,6 @@ Add the following content to the `.stylelintrc.json` to *extend* the standard co
 
     [Stylelint - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
 
----
 
 ## Prettier
 
