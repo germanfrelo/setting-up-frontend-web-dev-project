@@ -3,35 +3,30 @@
 ## Table of Contents
 
 - [Git](#git)
-- [Node.js + npm](#nodejs--npm)
-- [Node.js package](#nodejs-package)
+  - [1. Initialize a Git repository](#1-initialize-a-git-repository)
+  - [2. Ignore files](#2-ignore-files)
+  - [3. Normalize line endings](#3-normalize-line-endings)
+- [npm package](#npm-package)
 - [EditorConfig, Prettier & ESLint](#editorconfig-prettier--eslint)
+  - [1. Installation](#1-installation)
+  - [2. Configuration](#2-configuration)
+  - [3. Usage](#3-usage)
 
 ## Git
 
-### 1. Installation
+ℹ️ Prerequisites: [Git installed](https://github.com/germanfrelo/my-frontend-web-development-setup/blob/main/README.md#git).
 
-[https://git-scm.com/](https://git-scm.com/)
+### 1. Initialize a Git repository
 
-### 2. Verification
-
-```sh
-git --version
-
-# Output -> git version xx.xx.xx
-```
-
-### 3. Initialisation
-
-In the root of the project directory:
+In the **root of the project directory**, execute:
 
 ```sh
 git init
 
-# Output -> Initialized empty Git repository in /[...]/.git/
+# Output: Initialized empty Git repository in /[...]/.git/
 ```
 
-### 4. Ignoring files
+### 2. Ignore files
 
 1. Create a **`.gitignore`** file in the **root of the repository**.
 2. Go to [gitignore.io](http://gitignore.io) to get templates specific for the project (e.g. `node, react`) and add the generated content into the `.gitignore` file. Example:
@@ -41,7 +36,7 @@ git init
     node_modules/
     ```
 
-### 5. Normalizing line endings
+### 3. Normalize line endings
 
 - **Reference**
 
@@ -108,84 +103,14 @@ git init
 
     The `text` attribute doesn't change line endings for the **local copies** of your text files (i.e., the ones in Git's working tree)—it only changes line endings for files in the repo. The text files you just renormalized may still continue to use `CRLF` locally (on your file system) if that's the line ending with which they were originally created/cloned on your system.
 
-## Node.js + npm
+## npm package
 
-Download and install Node.js and npm (npm is included in Node.js).
+ℹ️ Prerequisites: [Node.js + npm](https://github.com/germanfrelo/my-frontend-web-development-setup/blob/main/README.md#nodejs--npm).
 
-ℹ️ If **Node.js and npm** are already installed using **nvm**, skip this section.
-How to verify it:
-
-```sh
-command -v nvm
-```
-
-```sh
-node -v
-```
-
-```sh
-npm -v
-```
-
-[Downloading and installing Node.js and npm | npm Docs](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-
-1. Verify that Git version is v1.7.10+
-
-    ```sh
-    git --version
-    # output -> git version xx.xx.xx
-    ```
-
-2. Install nvm (globally)
-
-    [https://github.com/nvm-sh/nvm#installing-and-updating](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-3. Verify installation and version
-
-    [https://github.com/nvm-sh/nvm#verify-installation](https://github.com/nvm-sh/nvm#verify-installation)
-
-    ```sh
-    command -v nvm
-    # output -> nvm
-    ```
-
-    ```sh
-    nvm -v
-    # output -> xx.xx.xx
-    ```
-
-4. Install the latest LTS version of Node.js + npm
-
-    [https://github.com/nvm-sh/nvm#usage](https://github.com/nvm-sh/nvm#usage)
-
-    ```sh
-    nvm install --lts
-    ```
-
-5. Verify installation and version
-    - Which Node.js and npm versions are being used
-
-        ```sh
-        node -v
-        # output -> vxx.xx.xx
-        ```
-
-        ```sh
-        npm -v
-        # output -> xx.xx.xx
-        ```
-
-    - Listing Node.js versions installed
-
-        ```sh
-        nvm ls
-        ```
-
-## Node.js package
-
-Set up a new Node.js package.
-
+npm docs reference:
 [https://docs.npmjs.com/cli/v8/commands/npm-init](https://docs.npmjs.com/cli/v8/commands/npm-init)
+
+Set up a new npm package in the root of the project diectory:
 
 ```sh
 npm init
@@ -254,7 +179,7 @@ The pattern:
 
 2. Install Prettier and ESLint locally using npm:
 
-   ℹ️ Prerequisites: [Node.js + npm](#nodejs--npm).
+   ℹ️ Prerequisites: [a `package.json` file](#npm-package).
 
    Prettier:
 
@@ -281,7 +206,7 @@ The pattern:
 
 ### 2. Configuration
 
-Prerequisites: [a `package.json` file](#nodejs-package).
+ℹ️ Prerequisites: [a `package.json` file](#npm-package).
 
 #### 1. Set up an ESLint configuration file
 
@@ -354,29 +279,40 @@ Finally, remove any code formatting rules you had in the `.eslintrc.json` file. 
 
 #### 3. Integrate Prettier with ESLint
 
-Integrate Prettier with ESLint to only have to run one command instead of two to lint and format our files.
+In order to lint and format the files by using only one command instead of two, integrate Prettier with ESLint by adding the [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) package.
 
-Install the [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) package:
+Install the `eslint-plugin-prettier` package:
 
 ```sh
 npm install eslint-plugin-prettier --save-dev --save-exact
 ```
 
-We will now rewrite our .eslintrc.json file by adding the prettier plugin in the plugins array and setting the newly established prettier rule to error so that any prettier formatting error is considered as an ESLint error.
+Verify that `"eslint-plugin-prettier"` is added as an entry to the `"devDependencies"` attribute of the `package.json` file:
 
 ```json
 {
-  "extends": ["eslint:recommended", "prettier"],
-  "env": {
-    "es6": true,
-    "node": true
-  },
-  "rules": {
-    "prettier/prettier": "error"
-  },
-  "plugins": [
-    "prettier"
-  ]
+    "devDependencies": {
+        "eslint": "x.x.x",
+        "eslint-config-prettier": "x.x.x",
+        "eslint-plugin-prettier": "x.x.x",
+        "prettier": "x.x.x"
+    }
+}
+```
+
+
+Then, modify the `.eslintrc.json` file:
+- Add the **Prettier plugin** in the `"plugins"` array.
+- Set the newly established **Prettier rule** to `"error"` so that any Prettier formatting error is considered as an ESLint error.
+
+```json
+{
+    "rules": {
+        "prettier/prettier": "error"
+    },
+    "plugins": [
+        "prettier"
+    ]
 }
 ```
 
@@ -445,7 +381,7 @@ Replace its content with this:
 
 [Home | Stylelint](https://stylelint.io/)
 
-ℹ️ **Prerequisites:**  Node.js  +  npm
+ℹ️ Prerequisites: [a `package.json` file](#npm-package).
 
 ### Installation
 
