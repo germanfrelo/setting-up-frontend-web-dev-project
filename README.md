@@ -154,6 +154,8 @@ Websites:
 
 References:
 
+- [Reasons to use both a local and global editorconfig file](https://blog.danskingdom.com/Reasons-to-use-both-a-local-and-global-editorconfig-file/)
+
 - [Why You Shoold Use ESLint, Prettier & EditorConfig](https://blog.theodo.com/2019/08/why-you-should-use-eslint-prettier-and-editorconfig-together/)
 
 - [Set up ESlint, Prettier & EditorConfig without conflicts](https://blog.theodo.com/2019/08/empower-your-dev-environment-with-eslint-prettier-and-editorconfig-with-no-conflicts/)
@@ -181,19 +183,11 @@ The pattern:
 
    ℹ️ Prerequisites: [a `package.json` file](#npm-package).
 
-   Prettier:
-
    ```sh
-   npm install prettier --save-dev --save-exact
+   npm install prettier eslint --save-dev --save-exact
    ```
 
-   ESLint:
-
-   ```sh
-   npm install eslint --save-dev --save-exact
-   ```
-
-3. Verify that Prettier and ESLint are added as entries to the `"devDependencies"` attribute of the `package.json` file:
+3. Verify that Prettier and ESLint are added as entries to the `devDependencies` attribute of the `package.json` file:
 
    ```json
    {
@@ -208,8 +202,6 @@ The pattern:
 
 #### 1. EditorConfig
 
-Reference: [Reasons to use both a local and global editorconfig file](https://blog.danskingdom.com/Reasons-to-use-both-a-local-and-global-editorconfig-file/)
-
 Local `.editorconfig` file:
 
 - For team settings (one per repository).
@@ -217,7 +209,7 @@ Local `.editorconfig` file:
 - Location: root directory of every repository.
 - Should only include settings that affect the physical contents of the file, and that you want enforced in the repository, not just how it appears in an editor.
 - Should have `root = false` defined so that presentation-only (and other) properties can be inherited from the global `.editorconfig` file.
-- Should not contain any presentation-only properties, such as "tab width".
+- Should not contain any presentation-only properties, such as `tab_width`.
 
 Code (GitHub Gist): [My local .editorconfig file](https://gist.github.com/germanfrelo/a71698d5c4592220a0fa4915f32182ce)
 
