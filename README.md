@@ -206,9 +206,24 @@ The pattern:
 
 ### 2. Configuration
 
-ℹ️ Prerequisites: [a `package.json` file](#npm-package).
+#### 1. EditorConfig
 
-#### 1. Set up an ESLint configuration file
+Reference: [Reasons to use both a local and global editorconfig file](https://blog.danskingdom.com/Reasons-to-use-both-a-local-and-global-editorconfig-file/)
+
+Local `.editorconfig` file:
+
+- For team settings (one per repository).
+- Gets committed to source control in every repository.
+- Location: root directory of every repository.
+- Should only include settings that affect the physical contents of the file, and that you want enforced in the repository, not just how it appears in an editor.
+- Should have `root = false` defined so that presentation-only (and other) properties can be inherited from the global `.editorconfig` file.
+- Should not contain any presentation-only properties, such as "tab width".
+
+Code (GitHub Gist): [My local .editorconfig file](https://gist.github.com/germanfrelo/a71698d5c4592220a0fa4915f32182ce)
+
+#### 2. Set up an ESLint configuration file
+
+ℹ️ Prerequisites: [a `package.json` file](#npm-package).
 
 ```sh
 npm init @eslint/config
@@ -245,7 +260,7 @@ This creates a `.eslintrc.json` configuration file in the project's root directo
 }
 ```
 
-#### 2. Turn off all ESLint rules that are unnecessary or might conflict with Prettier
+#### 3. Turn off all ESLint rules that are unnecessary or might conflict with Prettier
 
 Install the [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) package locally as a dev dependency:
 
@@ -277,7 +292,7 @@ Make sure to put it last, so it gets the chance to override any prior configurat
 
 Finally, remove any code formatting rules you had in the `.eslintrc.json` file. If `"rules"` is empty, go to the next step. If no, to find if the `"rules"` section of the ESLint configuration file (`.eslintrc.json`) contains any rules that are unnecessary or conflict with Prettier, run the [CLI helper tool](https://github.com/prettier/eslint-config-prettier#cli-helper-tool). (Remember, `"rules"` always "wins" over `"extends"`!)
 
-#### 3. Integrate Prettier with ESLint
+#### 4. Integrate Prettier with ESLint
 
 In order to lint and format the files by using only one command instead of two, integrate Prettier with ESLint by adding the [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) package.
 
@@ -300,8 +315,8 @@ Verify that `"eslint-plugin-prettier"` is added as an entry to the `"devDependen
 }
 ```
 
-
 Then, modify the `.eslintrc.json` file:
+
 - Add the **Prettier plugin** in the `"plugins"` array.
 - Set the newly established **Prettier rule** to `"error"` so that any Prettier formatting error is considered as an ESLint error.
 
@@ -316,32 +331,25 @@ Then, modify the `.eslintrc.json` file:
 }
 ```
 
-Replace its content with this:
+You can replace all the Prettier relevant configuration we made in our `.eslintrc.json` file by adding the `plugin:prettier/recommended` configuration in the extends array.
+
+Here is what it would look like:
+
+`.eslintrc.json`:
 
 ```json
 {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "node": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaVersion": "latest"
-    },
+    "extends": ["eslint:recommended", "plugin:prettier/recommended"]
+}
+```
+
+This configuration is the same as before but shorter and less explicit.
+
+My code quality ESLint rules:
+
+```json
+{
     "rules": {
-        "eol-last": [
-            "error",
-            "never"
-        ],
-        "indent": [
-            "error",
-            "tab",
-            {
-                "SwitchCase": 1
-            }
-        ],
-        "linebreak-style": ["error", "unix"],
         "quotes": ["error", "double"],
         "semi": ["error", "never"]
     }
@@ -360,6 +368,16 @@ Replace its content with this:
     ```sh
     npx eslint .
     ```
+
+    The lines that have formatting errors will be marked by `prettier/prettier` as errors within the ESLint error output.
+
+    Fix:
+
+    ```sh
+    npx eslint --fix .
+    ```
+
+    The files will get formatted the same way Prettier did.
 
 - **Option 2:**  Script
 
