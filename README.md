@@ -172,7 +172,7 @@ The pattern:
 
 #### 1.1. Installation
 
-Install [the extension/plugin for your Code Editor](https://editorconfig.org/#download).
+Install [the extension/plugin for your Code Editor](https://editorconfig.org/#download):
 
 - VS Code: [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
@@ -202,96 +202,99 @@ Characteristics:
 
 ### 2. Prettier
 
-#### 2.1. Install the Code Editor extensions
+#### 2.1. Installation
 
-   - [Prettier for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+Install the extension/plugin for your Code Editor:
 
-#### 2.2. Install Prettier using npm
+- VS Code: [Prettier for VS Code](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-   ℹ️ **Prerequisites: [a package.json file](#npm-package)**
+Install it using npm:
 
-   ```sh
-   npm install prettier --save-dev --save-exact
-   ```
+ℹ️ **Prerequisites: [a package.json file](#npm-package)**
 
-#### 2.3. Verify that it is added as `devDependencies` in the `package.json` file.
-   
-   ```json
-   {
-       "devDependencies": {
-           "prettier": "x.x.x"
-       }
-   }
-   ```
+```sh
+npm install prettier --save-dev --save-exact
+```
+
+Verify that it is added as `devDependencies` in the `package.json` file.
+
+```json
+{
+    "devDependencies": {
+        "prettier": "x.x.x"
+    }
+}
+```
 
 ### 3. ESLint
 
-3.1. Install the Code Editor extensions
+#### 3.1. Installation
 
-   - [ESLint for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+Install the extension/plugin for your Code Editor:
 
-3.2. Install ESLint using npm
+- VS Code: [ESLint for VS Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-   ℹ️ **Prerequisites: [a package.json file](#npm-package)**
+Install it using npm:
 
-   ```sh
-   npm install eslint --save-dev --save-exact
-   ```
+ℹ️ **Prerequisites: [a package.json file](#npm-package)**
 
-3.3. Verify that it is added as `devDependencies` in the `package.json` file
+```sh
+npm install eslint --save-dev --save-exact
+```
+
+Verify that it is added as `devDependencies` in the `package.json` file
    
    ```json
    {
        "devDependencies": {
-           "eslint": "x.x.x",
-           "prettier": "x.x.x"
+           "eslint": "x.x.x"
        }
    }
    ```
 
-3.4. Set up an ESLint configuration file
+#### 3.2. Configuration
 
-    ℹ️ **Prerequisites: [a package.json file](#npm-package)**
+ℹ️ **Prerequisites: [a package.json file](#npm-package)**
 
-    ```sh
-    npm init @eslint/config
-    ```
+```sh
+npm init @eslint/config
+```
 
-    Steps:
+Steps to answer:
 
-    - How would you like to use ESLint? · problems
+- How would you like to use ESLint? · problems
 
-    - Where does your code run? · browser, node
+- Where does your code run? · browser, node
 
-    - What format do you want your config file to be in? · JSON
+- What format do you want your config file to be in? · JSON
 
-    Output:
+Output:
 
-    ```sh
-    # Successfully created .eslintrc.* configuration file in ...
-    ```
+```sh
+# Successfully created .eslintrc.* configuration file in ...
+```
 
-    This creates a `.eslintrc.json` configuration file in the project's root directory, like this:
+This creates a `.eslintrc.json` configuration file in the project's root directory, like this:
 
-    ```json
-    {
-        "env": {
-            "browser": true,
-            "es2021": true,
-            "node": true
-        },
-        "extends": "eslint:recommended",
-        "parserOptions": {
-            "ecmaVersion": "latest"
-        },
-        "rules": {}
-    }
-    ```
+```json
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {}
+}
+```
 
-    ℹ️ **ESLint implicit ignore rules:**
+ℹ️ **ESLint implicit ignore rules:**
 
-    - `node_modules/` is ignored.
-    - dot-files (except for `.eslintrc.*`), as well as dot-folders and their contents, are ignored.
+- `node_modules/` is ignored.
+- dot-files (except for `.eslintrc.*`), as well as dot-folders and their contents, are ignored.
 
 ### 4. EditorConfig and Prettier
 
