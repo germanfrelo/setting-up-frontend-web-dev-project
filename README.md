@@ -8,9 +8,11 @@
   - [3. Normalize line endings](#3-normalize-line-endings)
 - [npm package](#npm-package)
 - [EditorConfig, Prettier & ESLint](#editorconfig-prettier--eslint)
-  - [1. Installation](#1-installation)
-  - [2. Configuration](#2-configuration)
-  - [3. Usage](#3-usage)
+  - [EditorConfig](#1-editorconfig)
+  - [Prettier](#2-prettier)
+  - [ESLint](#3-eslint)
+  - [EditorConfig and Prettier](#4-editorconfig-and-prettier)
+  - [Prettier and ESLint](#5-prettier-and-eslint)
 
 ## Git
 
@@ -168,13 +170,13 @@ The pattern:
 
 ### 1. EditorConfig
 
-#### 1. Installation
+#### 1.1. Installation
 
 Install [the extension/plugin for your Code Editor](https://editorconfig.org/#download).
 
 - VS Code: [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
-#### 2. Configuration
+#### 1.2. Configuration
 
 Create a `.editorconfig` file in the root of the project.
 
@@ -200,11 +202,11 @@ Characteristics:
 
 ### 2. Prettier
 
-1. Install the Code Editor extensions:
+#### 2.1. Install the Code Editor extensions
 
    - [Prettier for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-2. Install Prettier using npm:
+#### 2.2. Install Prettier using npm
 
    ℹ️ **Prerequisites: [a package.json file](#npm-package)**
 
@@ -212,7 +214,7 @@ Characteristics:
    npm install prettier --save-dev --save-exact
    ```
 
-3. Verify that it is added as `devDependencies` in the `package.json` file:
+#### 2.3. Verify that it is added as `devDependencies` in the `package.json` file.
    
    ```json
    {
@@ -224,11 +226,11 @@ Characteristics:
 
 ### 3. ESLint
 
-1. Install the Code Editor extensions:
+3.1. Install the Code Editor extensions
 
    - [ESLint for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-2. Install ESLint using npm:
+3.2. Install ESLint using npm
 
    ℹ️ **Prerequisites: [a package.json file](#npm-package)**
 
@@ -236,7 +238,7 @@ Characteristics:
    npm install eslint --save-dev --save-exact
    ```
 
-3. Verify that it is added as `devDependencies` in the `package.json` file:
+3.3. Verify that it is added as `devDependencies` in the `package.json` file
    
    ```json
    {
@@ -247,7 +249,7 @@ Characteristics:
    }
    ```
 
-4. Set up an ESLint configuration file.
+3.4. Set up an ESLint configuration file
 
     ℹ️ **Prerequisites: [a package.json file](#npm-package)**
 
@@ -295,7 +297,7 @@ Characteristics:
 
 ### 5. Prettier and ESLint
 
-#### 1. Turn off all ESLint rules that are unnecessary or might conflict with Prettier
+#### 5.1. Turn off all ESLint rules that are unnecessary or might conflict with Prettier
 
 Install the [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) package locally as a dev dependency:
 
@@ -327,7 +329,7 @@ Make sure to put it last, so it gets the chance to override any prior configurat
 
 Finally, remove any code formatting rules you had in the `.eslintrc.json` file. If `"rules"` is empty, go to the next step. If no, to find if the `"rules"` section of the ESLint configuration file (`.eslintrc.json`) contains any rules that are unnecessary or conflict with Prettier, run the [CLI helper tool](https://github.com/prettier/eslint-config-prettier#cli-helper-tool). (Remember, `"rules"` always "wins" over `"extends"`!)
 
-#### 2. Integrate Prettier with ESLint
+#### 5.2. Integrate Prettier with ESLint
 
 In order to lint and format the files by using only one command instead of two, integrate Prettier with ESLint by adding the [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) package.
 
