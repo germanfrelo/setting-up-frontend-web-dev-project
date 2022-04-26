@@ -14,7 +14,7 @@
 
 ## Git
 
-ℹ️ Prerequisites: [Git installed](https://github.com/germanfrelo/my-frontend-web-development-setup/blob/main/README.md#git).
+ℹ️ **Prerequisites: [Git installed](https://github.com/germanfrelo/my-frontend-web-development-setup/blob/main/README.md#git)**
 
 ### 1. Initialize a Git repository
 
@@ -105,7 +105,7 @@ git init
 
 ## npm package
 
-ℹ️ Prerequisites: [Node.js + npm](https://github.com/germanfrelo/my-frontend-web-development-setup/blob/main/README.md#nodejs--npm).
+ℹ️ **Prerequisites: [Node.js + npm](https://github.com/germanfrelo/my-frontend-web-development-setup/blob/main/README.md#nodejs--npm)**
 
 npm docs reference:
 [https://docs.npmjs.com/cli/v8/commands/npm-init](https://docs.npmjs.com/cli/v8/commands/npm-init)
@@ -166,29 +166,78 @@ The pattern:
 - Everything related to code formatting should be handled by **Prettier**.
 - The rest (code quality) should be handled by **ESLint**.
 
-### 1. Installation
+### 1. EditorConfig
 
-#### EditorConfig
+#### 1. Installation
 
-- Install the Code Editor extension: [EditorConfig for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig).
+Install [the extension/plugin for your Code Editor](https://editorconfig.org/#download).
 
-#### Prettier and ESLint
+- VS Code: [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+
+#### 2. Configuration
+
+Create a `.editorconfig` file in the root of the project.
+
+Example: [My local .editorconfig file](https://gist.github.com/germanfrelo/a71698d5c4592220a0fa4915f32182ce)
+
+Supported properties:
+
+- `indent_style`
+- `indent_size`
+- `tab_width`
+- `end_of_line` (appplied only on file save)
+- `insert_final_newline` (appplied only on file save)
+- `trim_trailing_whitespace` (appplied only on file save)
+
+Characteristics:
+
+- It's for team settings (one per repository).
+- Gets committed to source control in every repository.
+- Location: root directory of every repository.
+- Should only include settings that affect the physical contents of the file, and that you want enforced in the repository, not just how it appears in an editor.
+- Should have `root = false` defined so that presentation-only (and other) properties can be inherited from the global `.editorconfig` file.
+- Should not contain any presentation-only properties, such as `tab_width` or `tab_width`.
+
+### 2. Prettier
 
 1. Install the Code Editor extensions:
 
    - [Prettier for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-   - [ESLint for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-2. Install Prettier and ESLint locally using npm:
+2. Install Prettier using npm:
 
-   ℹ️ Prerequisites: [a `package.json` file](#npm-package).
+   ℹ️ **Prerequisites: [a package.json file](#npm-package)**
 
    ```sh
-   npm install prettier eslint --save-dev --save-exact
+   npm install prettier --save-dev --save-exact
    ```
 
-3. Verify that Prettier and ESLint are added as entries to the `devDependencies` attribute of the `package.json` file:
+3. Verify that it is added as `devDependencies` in the `package.json` file:
+   
+   ```json
+   {
+       "devDependencies": {
+           "prettier": "x.x.x"
+       }
+   }
+   ```
 
+### 3. ESLint
+
+1. Install the Code Editor extensions:
+
+   - [ESLint for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+2. Install ESLint using npm:
+
+   ℹ️ **Prerequisites: [a package.json file](#npm-package)**
+
+   ```sh
+   npm install eslint --save-dev --save-exact
+   ```
+
+3. Verify that it is added as `devDependencies` in the `package.json` file:
+   
    ```json
    {
        "devDependencies": {
@@ -198,61 +247,55 @@ The pattern:
    }
    ```
 
-### 2. Configuration
+4. Set up an ESLint configuration file.
 
-#### 1. EditorConfig
+    ℹ️ **Prerequisites: [a package.json file](#npm-package)**
 
-Local `.editorconfig` file:
+    ```sh
+    npm init @eslint/config
+    ```
 
-- For team settings (one per repository).
-- Gets committed to source control in every repository.
-- Location: root directory of every repository.
-- Should only include settings that affect the physical contents of the file, and that you want enforced in the repository, not just how it appears in an editor.
-- Should have `root = false` defined so that presentation-only (and other) properties can be inherited from the global `.editorconfig` file.
-- Should not contain any presentation-only properties, such as `tab_width`.
+    Steps:
 
-Code (GitHub Gist): [My local .editorconfig file](https://gist.github.com/germanfrelo/a71698d5c4592220a0fa4915f32182ce)
+    - How would you like to use ESLint? · problems
 
-#### 2. Set up an ESLint configuration file
+    - Where does your code run? · browser, node
 
-ℹ️ Prerequisites: [a `package.json` file](#npm-package).
+    - What format do you want your config file to be in? · JSON
 
-```sh
-npm init @eslint/config
-```
+    Output:
 
-Steps:
+    ```sh
+    # Successfully created .eslintrc.* configuration file in ...
+    ```
 
-- How would you like to use ESLint? · problems
+    This creates a `.eslintrc.json` configuration file in the project's root directory, like this:
 
-- Where does your code run? · browser, node
+    ```json
+    {
+        "env": {
+            "browser": true,
+            "es2021": true,
+            "node": true
+        },
+        "extends": "eslint:recommended",
+        "parserOptions": {
+            "ecmaVersion": "latest"
+        },
+        "rules": {}
+    }
+    ```
 
-- What format do you want your config file to be in? · JSON
+    ℹ️ **ESLint implicit ignore rules:**
 
-Output:
+    - `node_modules/` is ignored.
+    - dot-files (except for `.eslintrc.*`), as well as dot-folders and their contents, are ignored.
 
-```sh
-# Successfully created .eslintrc.* configuration file in ...
-```
+### 4. EditorConfig and Prettier
 
-This creates a `.eslintrc.json` configuration file in the project's root directory, like this:
+### 5. Prettier and ESLint
 
-```json
-{
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "node": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaVersion": "latest"
-    },
-    "rules": {}
-}
-```
-
-#### 3. Turn off all ESLint rules that are unnecessary or might conflict with Prettier
+#### 1. Turn off all ESLint rules that are unnecessary or might conflict with Prettier
 
 Install the [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) package locally as a dev dependency:
 
@@ -284,7 +327,7 @@ Make sure to put it last, so it gets the chance to override any prior configurat
 
 Finally, remove any code formatting rules you had in the `.eslintrc.json` file. If `"rules"` is empty, go to the next step. If no, to find if the `"rules"` section of the ESLint configuration file (`.eslintrc.json`) contains any rules that are unnecessary or conflict with Prettier, run the [CLI helper tool](https://github.com/prettier/eslint-config-prettier#cli-helper-tool). (Remember, `"rules"` always "wins" over `"extends"`!)
 
-#### 4. Integrate Prettier with ESLint
+#### 2. Integrate Prettier with ESLint
 
 In order to lint and format the files by using only one command instead of two, integrate Prettier with ESLint by adding the [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) package.
 
@@ -348,12 +391,7 @@ My code quality ESLint rules:
 }
 ```
 
-ℹ️ **ESLint implicit ignore rules:**
-
-- `node_modules/` is ignored.
-- dot-files (except for `.eslintrc.*`), as well as dot-folders and their contents, are ignored.
-
-### 3. Usage
+### 3. Using all three
 
 - **Option 1:**  CLI
 
@@ -391,7 +429,7 @@ My code quality ESLint rules:
 
 [Home | Stylelint](https://stylelint.io/)
 
-ℹ️ Prerequisites: [a `package.json` file](#npm-package).
+ℹ️ **Prerequisites: [a package.json file](#npm-package)**
 
 ### Installation
 
