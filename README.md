@@ -208,7 +208,7 @@ Install [the Prettier plugin/extension for your Code Editor](https://prettier.io
 
 - VS Code: [Prettier for VS Code](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-Install it using npm:
+Install it using npm (locally and as a dev dependency):
 
 ℹ️ **Prerequisites: [a package.json file](#npm-package)**
 
@@ -234,7 +234,7 @@ Install [the ESLint plugin/extension for your Code Editor](https://eslint.org/do
 
 - VS Code: [ESLint for VS Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-Install it using npm:
+Install it using npm (locally and as a dev dependency):
 
 ℹ️ **Prerequisites: [a package.json file](#npm-package)**
 
@@ -326,6 +326,8 @@ If you wish to change the configuration, **the rule is to check whether it is a 
 
 ### 5. Prettier and ESLint
 
+If you use ESLint, install eslint-config-prettier to make ESLint and Prettier play nice with each other. It turns off all ESLint rules that are unnecessary or might conflict with Prettier. There’s a similar config for Stylelint: stylelint-config-prettier
+
 #### 5.1. Turn off all ESLint rules that are unnecessary or might conflict with Prettier (code formatting rules)
 
 **Step 1:**
@@ -370,7 +372,7 @@ Finally, remove any code formatting rules that you might have in the `.eslintrc.
 
 #### 5.2. Integrate Prettier with ESLint
 
-Objective: to run Prettier as an ESLint rule (to lint and format the files by using only one command instead of two) and report Prettier formatting errors as ESLint errors.
+Objective: to run Prettier as an ESLint rule (to lint and format using only one command instead of two) so that Prettier formatting errors are reported as ESLint errors.
 
 **Step 1:**
 
@@ -434,8 +436,7 @@ My code quality ESLint rules:
 ```json
 {
     "rules": {
-        "quotes": ["error", "double"],
-        "semi": ["error", "never"]
+
     }
 }
 ```
@@ -450,7 +451,7 @@ My code quality ESLint rules:
 
     The lines that have formatting errors will be marked by `prettier/prettier` as errors within the ESLint error output.
 
-    Fix:
+    To fix errors:
 
     ```sh
     npx eslint --fix .
@@ -521,7 +522,7 @@ Add the following content to the `.stylelintrc.json` to *extend* the standard co
 
 ### Additional configurations
 
-**To sort CSS properties (**<https://github.com/stormwarning/stylelint-config-recess-order>**)**
+**To sort CSS properties (<https://github.com/stormwarning/stylelint-config-recess-order>)**
 
 1. Installation
 
@@ -587,6 +588,29 @@ Add the following content to the `.stylelintrc.json` to *extend* the standard co
         ]
     }
     ```
+
+### Prettier and Stylelint
+
+#### Turn off all Stylelint rules that are unnecessary or might conflict with Prettier (code formatting rules)
+
+**Step 1:**
+
+Install the Prettier's [`stylelint-config-prettier`](https://github.com/prettier/stylelint-config-prettier) package, locally and as a dev dependency:
+
+```sh
+npm install stylelint-config-prettier --save-dev --save-exact
+```
+
+Verify that it is added as `devDependencies` in the `package.json` file:
+
+```json
+{
+    "devDependencies": {
+        "prettier": "x.x.x",
+        "stylelint-config-prettier": "x.x.x",
+    }
+}
+```
 
 ### Usage
 
