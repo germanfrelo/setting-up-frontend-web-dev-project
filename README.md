@@ -243,7 +243,7 @@ npm install eslint --save-dev --save-exact
 ```
 
 Verify that it is added as `devDependencies` in the `package.json` file
-   
+
    ```json
    {
        "devDependencies": {
@@ -271,7 +271,7 @@ Steps to answer:
 Output:
 
 ```sh
-# Successfully created .eslintrc.* configuration file in ...
+# Successfully created .eslintrc.json configuration file in ...
 ```
 
 This creates a `.eslintrc.json` configuration file in the project's root directory, like this:
@@ -297,6 +297,32 @@ This creates a `.eslintrc.json` configuration file in the project's root directo
 - dot-files (except for `.eslintrc.*`), as well as dot-folders and their contents, are ignored.
 
 ### 4. EditorConfig and Prettier
+
+The objective is to avoid redundant configuration between EditorConfig and Prettier.
+
+**Prettier and EditorConfig share some configuration options that we do *not* want to repeat in two separate configuration files and keep them in sync** (e.g. end of line configuration).
+
+The latest versions of Prettier address this issue by parsing the `.editorconfig` file to determine what configuration options to use. Those (EditorConfig) options are limited to:
+
+```editor-config
+end_of_line
+indent_style
+indent_size/tab_width
+max_line_length
+```
+
+The previous (EditorConfig) configuration options will override the following Prettier options (if they are not defined in the `.prettierrc`):
+
+```json
+"endOfLine"
+"useTabs"
+"tabWidth"
+"printWidth"
+```
+
+**The previous configuration options should be written only in `.editorconfig`.**
+
+If you wish to change the configuration, **the rule is to check whether it is a EditorConfig or Prettier relevant configuration and then change it in the appropriate file**.
 
 ### 5. Prettier and ESLint
 
