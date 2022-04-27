@@ -242,15 +242,15 @@ Install it using npm:
 npm install eslint --save-dev --save-exact
 ```
 
-Verify that it is added as `devDependencies` in the `package.json` file
+Verify that it is added as `devDependencies` in the `package.json` file.
 
-   ```json
-   {
-       "devDependencies": {
-           "eslint": "x.x.x"
-       }
-   }
-   ```
+```json
+{
+    "devDependencies": {
+        "eslint": "x.x.x"
+    }
+}
+```
 
 #### 3.2. Configuration
 
@@ -326,15 +326,17 @@ If you wish to change the configuration, **the rule is to check whether it is a 
 
 ### 5. Prettier and ESLint
 
-#### 5.1. Turn off all ESLint rules that are unnecessary or might conflict with Prettier
+#### 5.1. Turn off all ESLint rules that are unnecessary or might conflict with Prettier (code formatting rules)
 
-Install the [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) package locally as a dev dependency:
+**Step 1:**
+
+Install the Prettier's [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) package, locally and as a dev dependency:
 
 ```sh
 npm install eslint-config-prettier --save-dev --save-exact
 ```
 
-Verify that `"eslint-config-prettier"` is added as an entry to the `"devDependencies"` attribute of the `package.json` file:
+Verify that it is added as `devDependencies` in the `package.json` file:
 
 ```json
 {
@@ -346,7 +348,9 @@ Verify that `"eslint-config-prettier"` is added as an entry to the `"devDependen
 }
 ```
 
-Then, add `"prettier"` to the `"extends"` array in the `.eslintrc.json` file.
+**Step 2:**
+
+Add `prettier` to the `extends` array in the `.eslintrc.json` file:
 
 ```json
 {
@@ -354,21 +358,29 @@ Then, add `"prettier"` to the `"extends"` array in the `.eslintrc.json` file.
 }
 ```
 
-Make sure to put it last, so it gets the chance to override any prior configuration in the extends array disabling all ESLint code formatting rules. With this configuration, Prettier and ESLint can be run separately without any issues.
+Make sure to put it last, so that it will override any prior configuration in the `extends` array, disabling all ESLint code formatting rules. With this configuration, Prettier and ESLint can be run separately without any issues.
 
-Finally, remove any code formatting rules you had in the `.eslintrc.json` file. If `"rules"` is empty, go to the next step. If no, to find if the `"rules"` section of the ESLint configuration file (`.eslintrc.json`) contains any rules that are unnecessary or conflict with Prettier, run the [CLI helper tool](https://github.com/prettier/eslint-config-prettier#cli-helper-tool). (Remember, `"rules"` always "wins" over `"extends"`!)
+**Step 3:**
+
+Finally, remove any code formatting rules that you might have in the `.eslintrc.json` file:
+
+- If there are no `rules`, skip this step.
+
+- If there are `rules`, to find if any of them are unnecessary or conflict with Prettier, run the [CLI helper tool](https://github.com/prettier/eslint-config-prettier#cli-helper-tool).
 
 #### 5.2. Integrate Prettier with ESLint
 
-In order to lint and format the files by using only one command instead of two, integrate Prettier with ESLint by adding the [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) package.
+Objective: to run Prettier as an ESLint rule (to lint and format the files by using only one command instead of two) and report Prettier formatting errors as ESLint errors.
 
-Install the `eslint-plugin-prettier` package:
+**Step 1:**
+
+Install the Prettier's [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) package, locally and as a dev dependency:
 
 ```sh
 npm install eslint-plugin-prettier --save-dev --save-exact
 ```
 
-Verify that `"eslint-plugin-prettier"` is added as an entry to the `"devDependencies"` attribute of the `package.json` file:
+Verify that it is added as `devDependencies` in the `package.json` file:
 
 ```json
 {
@@ -381,25 +393,31 @@ Verify that `"eslint-plugin-prettier"` is added as an entry to the `"devDependen
 }
 ```
 
-Then, modify the `.eslintrc.json` file:
+**Step 2:**
 
-- Add the **Prettier plugin** in the `"plugins"` array.
-- Set the newly established **Prettier rule** to `"error"` so that any Prettier formatting error is considered as an ESLint error.
+Add the Prettier plugin (`prettier`) to the `plugins` array in the `.eslintrc.json` file:
 
 ```json
 {
-    "rules": {
-        "prettier/prettier": "error"
-    },
     "plugins": [
         "prettier"
     ]
 }
 ```
 
-You can replace all the Prettier relevant configuration we made in our `.eslintrc.json` file by adding the `plugin:prettier/recommended` configuration in the extends array.
+**Step 3:**
 
-Here is what it would look like:
+Set the newly established Prettier rule (`prettier/prettier`) to `error` in the `rules` attribute in the `.package.json` file:
+
+```json
+{
+    "rules": {
+        "prettier/prettier": "error"
+    }
+}
+```
+
+You can replace all the Prettier relevant configuration we made in our `.eslintrc.json` file by adding the `plugin:prettier/recommended` configuration in the `extends` array:
 
 `.eslintrc.json`:
 
@@ -474,7 +492,7 @@ npm install stylelint stylelint-config-standard --save-dev --save-exact
 
 ### Verification
 
-Verify that Stylelint and its standard configuration are added as entries to the `"devDependencies"` attribute of the `package.json` file, like this:
+Verify that Stylelint and its standard configuration are added as `"devDependencies"` in the `package.json` file:
 
 ```json
 "devDependencies": {
