@@ -172,7 +172,7 @@ The pattern:
 
 #### 1.1. Installation
 
-Install [the extension/plugin for your Code Editor](https://editorconfig.org/#download):
+Install [the EditorConfig plugin/extension for your Code Editor](https://editorconfig.org/#download):
 
 - VS Code: [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
@@ -204,7 +204,7 @@ Characteristics:
 
 #### 2.1. Installation
 
-Install the extension/plugin for your Code Editor:
+Install [the Prettier plugin/extension for your Code Editor](https://prettier.io/docs/en/editors.html):
 
 - VS Code: [Prettier for VS Code](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
@@ -230,7 +230,7 @@ Verify that it is added as `devDependencies` in the `package.json` file.
 
 #### 3.1. Installation
 
-Install the extension/plugin for your Code Editor:
+Install [the ESLint plugin/extension for your Code Editor](https://eslint.org/docs/user-guide/integrations#editors):
 
 - VS Code: [ESLint for VS Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
