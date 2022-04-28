@@ -226,6 +226,20 @@ Verify that it is added as `devDependencies` in the `package.json` file.
 }
 ```
 
+ℹ️ **Prettier implicit ignore rules:**
+
+By default, Prettier ignores:
+
+- files in version control systems directories (".git", ".svn" and ".hg")
+- `node_modules`
+
+```gitignore
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+```
+
 ### 3. ESLint
 
 #### 3.1. Installation
@@ -293,8 +307,10 @@ This creates a `.eslintrc.json` configuration file in the project's root directo
 
 ℹ️ **ESLint implicit ignore rules:**
 
-- `node_modules/` is ignored.
-- dot-files (except for `.eslintrc.*`), as well as dot-folders and their contents, are ignored.
+By default, ESLint ignores:
+
+- dot-files (except for `.eslintrc.*`), as well as dot-folders and their contents
+- `node_modules/`
 
 ### 4. EditorConfig and Prettier
 
@@ -325,8 +341,6 @@ The previous (EditorConfig) configuration options will override the following Pr
 If you wish to change the configuration, **the rule is to check whether it is a EditorConfig or Prettier relevant configuration and then change it in the appropriate file**.
 
 ### 5. Prettier and ESLint
-
-If you use ESLint, install eslint-config-prettier to make ESLint and Prettier play nice with each other. It turns off all ESLint rules that are unnecessary or might conflict with Prettier. There’s a similar config for Stylelint: stylelint-config-prettier
 
 #### 5.1. Turn off all ESLint rules that are unnecessary or might conflict with Prettier (code formatting rules)
 
