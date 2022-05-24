@@ -14,6 +14,8 @@
   - [3.2. Prettier](#32-prettier)
     - [3.2.1. Installation](#321-installation)
   - [3.3. Stylelint](#33-stylelint)
+    - [3.3.1. Installation](#331-installation)
+    - [3.3.2. Configuration](#332-configuration)
   - [3.4. ESLint](#34-eslint)
     - [3.4.1. Installation](#341-installation)
     - [3.4.2. Configuration](#342-configuration)
@@ -155,23 +157,15 @@ This creates a `package.json` file like this:
 
 ## 3. EditorConfig, Formatters and Linters
 
-Websites:
-
-- [Prettier](https://prettier.io)
-- [Stylelint](https://stylelint.io)
-- [ESLint](https://eslint.org)
+- All configuration related to the editor (end of line, indent style, indent size...) should be handled by **EditorConfig**.
+- Everything related to code formatting should be handled by **Prettier**.
+- The code quality should be handled by **Stylelint** and **ESLint**.
 
 References:
 
 - [Why You Shoold Use ESLint, Prettier & EditorConfig](https://blog.theodo.com/2019/08/why-you-should-use-eslint-prettier-and-editorconfig-together/)
 
 - [Set up ESlint, Prettier & EditorConfig without conflicts](https://blog.theodo.com/2019/08/empower-your-dev-environment-with-eslint-prettier-and-editorconfig-with-no-conflicts/)
-
-The pattern:
-
-- All configuration related to the editor (end of line, indent style, indent size...) should be handled by **EditorConfig**.
-- Everything related to code formatting should be handled by **Prettier**.
-- The code quality should be handled by **Stylelint** and **ESLint**.
 
 ### 3.1. EditorConfig
 
@@ -181,11 +175,11 @@ The pattern:
 
 Install [the EditorConfig plugin/extension for your Code Editor](https://editorconfig.org/#download):
 
-- For Visual Studio Code: [EditorConfig extension for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- For Visual Studio Code: [EditorConfig extension for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
 #### 3.1.2. The *per-repository, local* file
 
-**Recommended prerequisites:** having [a global `.editorconfig` file](https://github.com/germanfrelo/my-frontend-web-development-setup#the-personal-global-file).
+ℹ️ **Recommended prerequisites: [a global `.editorconfig` file](https://github.com/germanfrelo/my-frontend-web-development-setup#the-personal-global-file).**
 
 Create an `.editorconfig` file in the root of the repository. This file:
 
@@ -201,21 +195,27 @@ See **[my local `.editorconfig` file](https://gist.github.com/germanfrelo/a71698
 
 ### 3.2. Prettier
 
+<https://prettier.io>
+
 #### 3.2.1. Installation
 
-First, install and configure the **Prettier plugin/extension for your Code Editor**. See [the code editors that support Prettier](https://prettier.io/docs/en/editors.html):
+**Step 1:**
 
-- For **Visual Studio Code**, see [my installation and configuration of the Prettier extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#prettier-extension-for-vscode).
+Install and configure [the Prettier plugin/extension for your Code Editor](https://prettier.io/docs/en/editors.html):
 
-Then, **install Prettier in the project** (locally, as a dev dependency and with its version pinned):
+- For Visual Studio Code, see [my installation and configuration of the Prettier extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#prettier-extension-for-vscode).
 
-ℹ️ **Prerequisites: [a package.json file](#2-npm-package)**
+**Step 2:**
+
+Install Prettier in the project (locally, as a dev dependency, and with its version pinned):
+
+ℹ️ **Prerequisites: [a `package.json` file](#2-npm-package).**
 
 ```sh
 npm install prettier --save-dev --save-exact
 ```
 
-Verify that it is added as `devDependencies` in the `package.json` file.
+Verify that it is added as `devDependencies` in the `package.json` file:
 
 ```json
 {
@@ -241,21 +241,27 @@ By default, Prettier ignores:
 
 ### 3.3. Stylelint
 
+<https://stylelint.io>
+
 #### 3.3.1. Installation
 
-First, install and configure the **Stylelint plugin/extension for your Code Editor**. See [the code editors that support Stylelint](https://stylelint.io/user-guide/integrations/editor):
+**Step 1:**
 
-- For **Visual Studio Code**, see [my installation and configuration of the Stylelint extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#stylelint-extension-for-vscode).
+Install and configure [the Stylelint plugin/extension for your Code Editor](https://stylelint.io/user-guide/integrations/editor):
 
-Then, **install Stylelint in the project** (locally, as a dev dependency and with its version pinned):
+- For Visual Studio Code, see [my installation and configuration of the Stylelint extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#stylelint-extension-for-vscode).
 
-ℹ️ **Prerequisites: [a package.json file](#2-npm-package)**
+**Step 2:**
+
+Install Stylelint in the project (locally, as a dev dependency, and with its version pinned):
+
+ℹ️ **Prerequisites: [a `package.json` file](#2-npm-package).**
 
 ```sh
 npm install stylelint --save-dev --save-exact
 ```
 
-Verify that it is added as `devDependencies` in the `package.json` file.
+Verify that it is added as `devDependencies` in the `package.json` file:
 
 ```json
 {
@@ -265,24 +271,21 @@ Verify that it is added as `devDependencies` in the `package.json` file.
 }
 ```
 
-Install Stylelint with its standard configuration (<https://github.com/stylelint/stylelint-config-standard>) in the project (locally, as a dev dependency and with its version pinned):
+#### 3.3.2. Configuration
+
+Install [the Stylelint standard configuration](https://github.com/stylelint/stylelint-config-standard) in the project (locally, as a dev dependency, and with its version pinned):
 
 ```sh
-npm install stylelint stylelint-config-standard --save-dev --save-exact
+npm install stylelint-config-standard --save-dev --save-exact
 ```
 
-### 3.3.2. Verification
-
-Verify that Stylelint and its standard configuration are added as `"devDependencies"` in the `package.json` file:
+Verify that is is added as `"devDependencies"` in the `package.json` file:
 
 ```json
 "devDependencies": {
-    "stylelint": "x.x.x",
     "stylelint-config-standard": "x.x.x"
 }
 ```
-
-### Configuration
 
 Create a `.stylelintrc.json` configuration file in the project's root directory.
 
@@ -300,7 +303,7 @@ Add the following content to the `.stylelintrc.json` to *extend* the standard co
 }
 ```
 
-### Additional configurations
+##### Additional configuration
 
 **To sort CSS properties (<https://github.com/stormwarning/stylelint-config-recess-order>)**
 
@@ -371,25 +374,27 @@ Add the following content to the `.stylelintrc.json` to *extend* the standard co
 
 ### 3.4. ESLint
 
+<https://eslint.org>
+
 #### 3.4.1. Installation
 
 **Step 1:**
 
-Install [the ESLint plugin/extension for your Code Editor](https://eslint.org/docs/user-guide/integrations#editors):
+Install and configure [the ESLint plugin/extension for your Code Editor](https://eslint.org/docs/user-guide/integrations#editors):
 
-- For Visual Studio Code: [ESLint extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#eslint-extension-for-vscode)
+- For Visual Studio Code, see [my installation and configuration of the ESLint extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#eslint-extension-for-vscode).
 
 **Step 2:**
 
-Install ESLint in the project (locally, as a dev dependency and with its version pinned):
+Install ESLint in the project (locally, as a dev dependency, and with its version pinned):
 
-ℹ️ **Prerequisites: [a package.json file](#2-npm-package)**
+ℹ️ **Prerequisites: [a `package.json` file](#2-npm-package).**
 
 ```sh
 npm install eslint --save-dev --save-exact
 ```
 
-Verify that it is added as `devDependencies` in the `package.json` file.
+Verify that it is added as `devDependencies` in the `package.json` file:
 
 ```json
 {
@@ -400,8 +405,6 @@ Verify that it is added as `devDependencies` in the `package.json` file.
 ```
 
 #### 3.4.2. Configuration
-
-ℹ️ **Prerequisites: [a package.json file](#2-npm-package)**
 
 ```sh
 npm init @eslint/config
@@ -479,7 +482,7 @@ Turn off all ESLint rules that are unnecessary or might conflict with Prettier (
 
 **Step 1:**
 
-Install the Prettier's [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) package in the project (locally, as a dev dependency and with its version pinned):
+Install the Prettier's [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) package in the project (locally, as a dev dependency, and with its version pinned):
 
 ```sh
 npm install eslint-config-prettier --save-dev --save-exact
@@ -567,7 +570,7 @@ My code quality ESLint rules:
 
 **Step 1:**
 
-Install the Prettier's [`stylelint-config-prettier`](https://github.com/prettier/stylelint-config-prettier) package in the project (locally, as a dev dependency and with its version pinned):
+Install the Prettier's [`stylelint-config-prettier`](https://github.com/prettier/stylelint-config-prettier) package in the project (locally, as a dev dependency, and with its version pinned):
 
 ```sh
 npm install stylelint-config-prettier --save-dev --save-exact
