@@ -2,23 +2,30 @@
 
 ## Table of Contents
 
-- [Git](#git)
-  - [1. Initialize a Git repository](#1-initialize-a-git-repository)
-  - [2. Ignore files](#2-ignore-files)
-  - [3. Normalize line endings](#3-normalize-line-endings)
-- [npm package](#npm-package)
-- [EditorConfig, Prettier & ESLint](#editorconfig-prettier--eslint)
-  - [EditorConfig](#1-editorconfig)
-  - [Prettier](#2-prettier)
-  - [ESLint](#3-eslint)
-  - [EditorConfig and Prettier](#4-editorconfig-and-prettier)
-  - [Prettier and ESLint](#5-prettier-and-eslint)
+- [1. Git](#1-git)
+  - [1.1. Initialize a Git repository](#11-initialize-a-git-repository)
+  - [1.2. Ignore files](#12-ignore-files)
+  - [1.3. Normalize line endings](#13-normalize-line-endings)
+- [2. npm package](#2-npm-package)
+- [3. EditorConfig, Formatters and Linters](#3-editorconfig-formatters-and-linters)
+  - [3.1. EditorConfig](#31-editorconfig)
+    - [3.1.1. Installation](#311-installation)
+    - [3.1.2. Configuration](#312-configuration)
+  - [3.2. Prettier](#32-prettier)
+    - [3.2.1. Installation](#321-installation)
+  - [3.3. Stylelint](#33-stylelint)
+  - [3.4. ESLint](#34-eslint)
+    - [3.4.1. Installation](#341-installation)
+    - [3.4.2. Configuration](#342-configuration)
+  - [3.5. EditorConfig and Prettier](#35-editorconfig-and-prettier)
+  - [3.6. Prettier and Stylelint](#36-prettier-and-stylelint)
+  - [3.7. Prettier and ESLint](#37-prettier-and-eslint)
 
-## Git
+## 1. Git
 
-ℹ️ **Prerequisites: [Git installed](https://github.com/germanfrelo/my-frontend-web-development-setup/blob/main/README.md#git)**
+ℹ️ **Prerequisites: [Git installed](https://github.com/germanfrelo/my-frontend-web-development-setup#git)**
 
-### 1. Initialize a Git repository
+### 1.1. Initialize a Git repository
 
 In the **root of the project directory**, execute:
 
@@ -28,7 +35,7 @@ git init
 # Output: Initialized empty Git repository in /[...]/.git/
 ```
 
-### 2. Ignore files
+### 1.2. Ignore files
 
 1. Create a **`.gitignore`** file in the **root of the repository**.
 2. Go to [gitignore.io](http://gitignore.io) to get templates specific for the project (e.g. `node, react`) and add the generated content into the `.gitignore` file. Example:
@@ -38,7 +45,7 @@ git init
     node_modules/
     ```
 
-### 3. Normalize line endings
+### 1.3. Normalize line endings
 
 - **Reference**
 
@@ -105,9 +112,9 @@ git init
 
     The `text` attribute doesn't change line endings for the **local copies** of your text files (i.e., the ones in Git's working tree)—it only changes line endings for files in the repo. The text files you just renormalized may still continue to use `CRLF` locally (on your file system) if that's the line ending with which they were originally created/cloned on your system.
 
-## npm package
+## 2. npm package
 
-ℹ️ **Prerequisites: [Node.js + npm](https://github.com/germanfrelo/my-frontend-web-development-setup/blob/main/README.md#nodejs--npm)**
+ℹ️ **Prerequisites: [Node.js + npm](https://github.com/germanfrelo/my-frontend-web-development-setup#nodejs--npm)**
 
 npm docs reference:
 [https://docs.npmjs.com/cli/v8/commands/npm-init](https://docs.npmjs.com/cli/v8/commands/npm-init)
@@ -146,17 +153,15 @@ This creates a `package.json` file like this:
 }
 ```
 
-## EditorConfig, Prettier & ESLint
+## 3. EditorConfig, Formatters and Linters
 
 Websites:
 
-- [EditorConfig](https://editorconfig.org)
 - [Prettier](https://prettier.io)
+- [Stylelint](https://stylelint.io)
 - [ESLint](https://eslint.org)
 
 References:
-
-- [Reasons to use both a local and global editorconfig file](https://blog.danskingdom.com/Reasons-to-use-both-a-local-and-global-editorconfig-file/)
 
 - [Why You Shoold Use ESLint, Prettier & EditorConfig](https://blog.theodo.com/2019/08/why-you-should-use-eslint-prettier-and-editorconfig-together/)
 
@@ -166,51 +171,45 @@ The pattern:
 
 - All configuration related to the editor (end of line, indent style, indent size...) should be handled by **EditorConfig**.
 - Everything related to code formatting should be handled by **Prettier**.
-- The rest (code quality) should be handled by **ESLint**.
+- The code quality should be handled by **Stylelint** and **ESLint**.
 
-### 1. EditorConfig
+### 3.1. EditorConfig
 
-#### 1.1. Installation
+<https://editorconfig.org>
+
+#### 3.1.1. The code editor plugin
 
 Install [the EditorConfig plugin/extension for your Code Editor](https://editorconfig.org/#download):
 
-- VS Code: [EditorConfig extension for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- For Visual Studio Code: [EditorConfig extension for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
-#### 1.2. Configuration
+#### 3.1.2. The *per-repository, local* file
 
-Create a `.editorconfig` file in the root of the project.
+**Recommended prerequisites:** having [a global `.editorconfig` file](https://github.com/germanfrelo/my-frontend-web-development-setup#the-personal-global-file).
 
-Example: [My local .editorconfig file](https://gist.github.com/germanfrelo/a71698d5c4592220a0fa4915f32182ce)
+Create an `.editorconfig` file in the root of the repository. This file:
 
-Supported properties:
+- Is for team settings.
+- Gets committed to source control.
+- Should **only include** properties that affect the physical contents of the file, and that you want enforced in the repository, not just how it appears in an editor.
+- Should **not include** any presentation-only properties, such as `indent_size` or `tab_width`.
+- Should have `root = false` defined, so that presentation-only (and other) properties can be inherited from [a personal, global `.editorconfig` file](https://github.com/germanfrelo/my-frontend-web-development-setup#the-personal-global-file).
 
-- `indent_style`
-- `indent_size`
-- `tab_width`
-- `end_of_line` (appplied only on file save)
-- `insert_final_newline` (appplied only on file save)
-- `trim_trailing_whitespace` (appplied only on file save)
+This is the list of [EditorConfig properties](https://editorconfig-specification.readthedocs.io/#supported-pairs).
 
-Characteristics:
+See **[my local `.editorconfig` file](https://gist.github.com/germanfrelo/a71698d5c4592220a0fa4915f32182ce)**.
 
-- It's for team settings (one per repository).
-- Gets committed to source control in every repository.
-- Location: root directory of every repository.
-- Should only include settings that affect the physical contents of the file, and that you want enforced in the repository, not just how it appears in an editor.
-- Should have `root = false` defined so that presentation-only (and other) properties can be inherited from the global `.editorconfig` file.
-- Should not contain any presentation-only properties, such as `tab_width` or `tab_width`.
+### 3.2. Prettier
 
-### 2. Prettier
-
-#### 2.1. Installation
+#### 3.2.1. Installation
 
 First, install and configure the **Prettier plugin/extension for your Code Editor**. See [the code editors that support Prettier](https://prettier.io/docs/en/editors.html):
 
-- For **Visual Studio Code**, see [my Prettier extension for VS Code installation and configuration](https://github.com/germanfrelo/my-frontend-web-development-setup#prettier-extension-for-vscode).
+- For **Visual Studio Code**, see [my installation and configuration of the Prettier extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#prettier-extension-for-vscode).
 
 Then, **install Prettier in the project** (locally, as a dev dependency and with its version pinned):
 
-ℹ️ **Prerequisites: [a package.json file](#npm-package)**
+ℹ️ **Prerequisites: [a package.json file](#2-npm-package)**
 
 ```sh
 npm install prettier --save-dev --save-exact
@@ -240,24 +239,20 @@ By default, Prettier ignores:
 **/node_modules
 ```
 
-### 3. ESLint
+### 3.3. Stylelint
 
-#### 3.1. Installation
+#### 3.3.1. Installation
 
-**Step 1:**
+First, install and configure the **Stylelint plugin/extension for your Code Editor**. See [the code editors that support Stylelint](https://stylelint.io/user-guide/integrations/editor):
 
-Install [the ESLint plugin/extension for your Code Editor](https://eslint.org/docs/user-guide/integrations#editors):
+- For **Visual Studio Code**, see [my installation and configuration of the Stylelint extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#stylelint-extension-for-vscode).
 
-- VS Code: [ESLint extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup/blob/main/README.md#eslint-extension-for-vs-code)
+Then, **install Stylelint in the project** (locally, as a dev dependency and with its version pinned):
 
-**Step 2:**
-
-Install ESLint in the project (locally, as a dev dependency and with its version pinned):
-
-ℹ️ **Prerequisites: [a package.json file](#npm-package)**
+ℹ️ **Prerequisites: [a package.json file](#2-npm-package)**
 
 ```sh
-npm install eslint --save-dev --save-exact
+npm install stylelint --save-dev --save-exact
 ```
 
 Verify that it is added as `devDependencies` in the `package.json` file.
@@ -265,243 +260,10 @@ Verify that it is added as `devDependencies` in the `package.json` file.
 ```json
 {
     "devDependencies": {
-        "eslint": "x.x.x"
+        "stylelint": "x.x.x"
     }
 }
 ```
-
-#### 3.2. Configuration
-
-ℹ️ **Prerequisites: [a package.json file](#npm-package)**
-
-```sh
-npm init @eslint/config
-```
-
-Steps to answer:
-
-- How would you like to use ESLint? · problems
-
-- Where does your code run? · browser, node
-
-- What format do you want your config file to be in? · JSON
-
-Output:
-
-```sh
-# Successfully created .eslintrc.json configuration file in ...
-```
-
-This creates a `.eslintrc.json` configuration file in the project's root directory, like this:
-
-```json
-{
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "node": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaVersion": "latest"
-    },
-    "rules": {}
-}
-```
-
-ℹ️ **ESLint implicit ignore rules:**
-
-By default, ESLint ignores:
-
-- dot-files (except for `.eslintrc.*`), as well as dot-folders and their contents
-- `node_modules/`
-
-### 4. EditorConfig and Prettier
-
-The objective is to avoid redundant configuration between EditorConfig and Prettier.
-
-**Prettier and EditorConfig share some configuration options that we do *not* want to repeat in two separate configuration files and keep them in sync** (e.g. end of line configuration).
-
-The latest versions of Prettier address this issue by parsing the `.editorconfig` file to determine what configuration options to use. Those (EditorConfig) options are limited to:
-
-```editor-config
-end_of_line
-indent_style
-indent_size/tab_width
-max_line_length
-```
-
-The previous (EditorConfig) configuration options will override the following Prettier options (if they are not defined in the `.prettierrc`):
-
-```json
-"endOfLine"
-"useTabs"
-"tabWidth"
-"printWidth"
-```
-
-**The previous configuration options should be written only in `.editorconfig`.**
-
-If you wish to change the configuration, **the rule is to check whether it is a EditorConfig or Prettier relevant configuration and then change it in the appropriate file**.
-
-### 5. Prettier and ESLint
-
-#### 5.1. Turn off all ESLint rules that are unnecessary or might conflict with Prettier (code formatting rules)
-
-**Step 1:**
-
-Install the Prettier's [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) package in the project (locally, as a dev dependency and with its version pinned):
-
-```sh
-npm install eslint-config-prettier --save-dev --save-exact
-```
-
-Verify that it is added as `devDependencies` in the `package.json` file:
-
-```json
-{
-    "devDependencies": {
-        "eslint": "x.x.x",
-        "eslint-config-prettier": "x.x.x",
-        "prettier": "x.x.x"
-    }
-}
-```
-
-**Step 2:**
-
-Add `prettier` to the `extends` array in the `.eslintrc.json` file:
-
-```json
-{
-    "extends": ["eslint:recommended", "prettier"],
-}
-```
-
-Make sure to put it last, so that it will override any prior configuration in the `extends` array, disabling all ESLint code formatting rules. With this configuration, Prettier and ESLint can be run separately without any issues.
-
-**Step 3:**
-
-Finally, remove any code formatting rules that you might have in the `.eslintrc.json` file:
-
-- If there are no `rules`, skip this step.
-
-- If there are `rules`, to find if any of them are unnecessary or conflict with Prettier, run the [CLI helper tool](https://github.com/prettier/eslint-config-prettier#cli-helper-tool).
-
-#### 5.2. Integrate Prettier with ESLint
-
-Objective: to run Prettier as an ESLint rule (to lint and format using only one command instead of two) so that Prettier formatting errors are reported as ESLint errors.
-
-**Step 1:**
-
-Install the Prettier's [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) package in the project (locally, as a dev dependency and with its version pinned):
-
-```sh
-npm install eslint-plugin-prettier --save-dev --save-exact
-```
-
-Then, verify that it is added as `devDependencies` in the `package.json` file:
-
-```json
-{
-    "devDependencies": {
-        "eslint": "x.x.x",
-        "eslint-config-prettier": "x.x.x",
-        "eslint-plugin-prettier": "x.x.x",
-        "prettier": "x.x.x"
-    }
-}
-```
-
-**Step 2:**
-
-Add the Prettier plugin (`prettier`) to the `plugins` array in the `.eslintrc.json` file:
-
-```json
-{
-    "plugins": [
-        "prettier"
-    ]
-}
-```
-
-**Step 3:**
-
-Set the newly established Prettier rule (`prettier/prettier`) to `error` in the `rules` attribute in the `.package.json` file:
-
-```json
-{
-    "rules": {
-        "prettier/prettier": "error"
-    }
-}
-```
-
-You can replace all the Prettier relevant configuration we made in our `.eslintrc.json` file by adding the `plugin:prettier/recommended` configuration in the `extends` array:
-
-`.eslintrc.json`:
-
-```json
-{
-    "extends": ["eslint:recommended", "plugin:prettier/recommended"]
-}
-```
-
-This configuration is the same as before but shorter and less explicit.
-
-My code quality ESLint rules:
-
-```json
-{
-    "rules": {
-
-    }
-}
-```
-
-### 3. Using all three
-
-- **Option 1:**  CLI
-
-    ```sh
-    npx eslint .
-    ```
-
-    The lines that have formatting errors will be marked by `prettier/prettier` as errors within the ESLint error output.
-
-    To fix errors:
-
-    ```sh
-    npx eslint --fix .
-    ```
-
-    The files will get formatted the same way Prettier did.
-
-- **Option 2:**  Script
-
-    Add this to the `package.json` file:
-
-    ```json
-    "scripts": {
-        "lint:js": "eslint ."
-    }
-    ```
-
-    Run:
-
-    ```sh
-    npm run lint:js
-    ```
-
-## Stylelint
-
-[Home | Stylelint](https://stylelint.io/)
-
-ℹ️ **Prerequisites: [a package.json file](#npm-package)**
-
-### Installation
-
-Install the Code Editor extension: [Stylelint for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint).
 
 Install Stylelint with its standard configuration (<https://github.com/stylelint/stylelint-config-standard>) in the project (locally, as a dev dependency and with its version pinned):
 
@@ -509,7 +271,7 @@ Install Stylelint with its standard configuration (<https://github.com/stylelint
 npm install stylelint stylelint-config-standard --save-dev --save-exact
 ```
 
-### Verification
+### 3.3.2. Verification
 
 Verify that Stylelint and its standard configuration are added as `"devDependencies"` in the `package.json` file:
 
@@ -607,7 +369,199 @@ Add the following content to the `.stylelintrc.json` to *extend* the standard co
     }
     ```
 
-### Prettier and Stylelint
+### 3.4. ESLint
+
+#### 3.4.1. Installation
+
+**Step 1:**
+
+Install [the ESLint plugin/extension for your Code Editor](https://eslint.org/docs/user-guide/integrations#editors):
+
+- For Visual Studio Code: [ESLint extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#eslint-extension-for-vscode)
+
+**Step 2:**
+
+Install ESLint in the project (locally, as a dev dependency and with its version pinned):
+
+ℹ️ **Prerequisites: [a package.json file](#2-npm-package)**
+
+```sh
+npm install eslint --save-dev --save-exact
+```
+
+Verify that it is added as `devDependencies` in the `package.json` file.
+
+```json
+{
+    "devDependencies": {
+        "eslint": "x.x.x"
+    }
+}
+```
+
+#### 3.4.2. Configuration
+
+ℹ️ **Prerequisites: [a package.json file](#2-npm-package)**
+
+```sh
+npm init @eslint/config
+```
+
+Steps to answer:
+
+- How would you like to use ESLint? · problems
+
+- Where does your code run? · browser, node
+
+- What format do you want your config file to be in? · JSON
+
+Output:
+
+```sh
+# Successfully created .eslintrc.json configuration file in ...
+```
+
+This creates a `.eslintrc.json` configuration file in the project's root directory, like this:
+
+```json
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {}
+}
+```
+
+ℹ️ **ESLint implicit ignore rules:**
+
+By default, ESLint ignores:
+
+- dot-files (except for `.eslintrc.*`), as well as dot-folders and their contents
+- `node_modules/`
+
+### 3.5. EditorConfig and Prettier
+
+The objective is to avoid redundant configuration between EditorConfig and Prettier.
+
+**Prettier and EditorConfig share some configuration options that we do *not* want to repeat in two separate configuration files and keep them in sync** (e.g. end of line configuration).
+
+The latest versions of Prettier address this issue by parsing the `.editorconfig` file to determine what configuration options to use. Those (EditorConfig) options are limited to:
+
+```editor-config
+end_of_line
+indent_style
+indent_size/tab_width
+max_line_length
+```
+
+The previous (EditorConfig) configuration options will override the following Prettier options (if they are not defined in the `.prettierrc`):
+
+```json
+"endOfLine"
+"useTabs"
+"tabWidth"
+"printWidth"
+```
+
+**The previous configuration options should be written only in `.editorconfig`.**
+
+If you wish to change the configuration, **the rule is to check whether it is a EditorConfig or Prettier relevant configuration and then change it in the appropriate file**.
+
+### 3.7. Prettier and ESLint
+
+Turn off all ESLint rules that are unnecessary or might conflict with Prettier (code formatting rules)
+
+**Step 1:**
+
+Install the Prettier's [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) package in the project (locally, as a dev dependency and with its version pinned):
+
+```sh
+npm install eslint-config-prettier --save-dev --save-exact
+```
+
+Verify that it is added as `devDependencies` in the `package.json` file:
+
+```json
+{
+    "devDependencies": {
+        "eslint": "x.x.x",
+        "eslint-config-prettier": "x.x.x",
+        "prettier": "x.x.x"
+    }
+}
+```
+
+**Step 2:**
+
+Add `prettier` to the `extends` array in the `.eslintrc.json` file:
+
+```json
+{
+    "extends": ["eslint:recommended", "prettier"],
+}
+```
+
+**Make sure to put it last**, so that it will override any prior configuration in the `extends` array, disabling all ESLint code formatting rules. With this configuration, Prettier and ESLint can be run separately without any issues.
+
+**Step 3:**
+
+Finally, remove any code formatting rules that you might have in the `.eslintrc.json` file:
+
+- If there are no `rules`, skip this step.
+
+- If there are `rules`, to find if any of them are unnecessary or conflict with Prettier, run the [CLI helper tool](https://github.com/prettier/eslint-config-prettier#cli-helper-tool).
+
+My code quality ESLint rules:
+
+```json
+{
+    "rules": {
+
+    }
+}
+```
+
+### 3. Using all three
+
+- **Option 1:**  CLI
+
+    ```sh
+    npx eslint .
+    ```
+
+    The lines that have formatting errors will be marked by `prettier/prettier` as errors within the ESLint error output.
+
+    To fix errors:
+
+    ```sh
+    npx eslint --fix .
+    ```
+
+    The files will get formatted the same way Prettier did.
+
+- **Option 2:**  Script
+
+    Add this to the `package.json` file:
+
+    ```json
+    "scripts": {
+        "lint:js": "eslint ."
+    }
+    ```
+
+    Run:
+
+    ```sh
+    npm run lint:js
+    ```
+
+### 3.6. Prettier and Stylelint
 
 #### Turn off all Stylelint rules that are unnecessary or might conflict with Prettier (code formatting rules)
 
