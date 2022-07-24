@@ -71,7 +71,7 @@ git init
 1. **Create** a **`.gitattributes`** file in the **root of the repository** and add this content:
 
     ```gitattributes
-    # Normalize line endings of all text files checked into the repo with LF.
+    # Normalize line endings of all text files checked into the repo with LF
     * text=auto
     ```
 
@@ -584,6 +584,17 @@ Then, verify that it is added as `devDependencies` in the `package.json` file:
         "prettier": "x.x.x",
         "stylelint-config-prettier": "x.x.x",
     }
+}
+```
+
+Then, append `stylelint-config-prettier` to the extends array in your `.stylelintrc.*` file. Make sure to put it **last**, so it will override other configs:
+
+```json
+{
+    "extends": [
+      // other configs ...
+      "stylelint-config-prettier"
+    ]
 }
 ```
 
