@@ -155,6 +155,16 @@ This creates a `package.json` file like this:
 }
 ```
 
+Set dependencies saved to `package.json` to be configured with an exact version rather than using npm's default semver range operator:
+
+1. Create a file named `.npmrc` in the root of the project.
+
+2. Add the following content and save it.
+
+```sh
+save-exact=true
+```
+
 ## 3. EditorConfig, Formatters and Linters
 
 - All configuration related to the editor (end of line, indent style, indent size...) should be handled by **EditorConfig**.
