@@ -161,9 +161,9 @@ Set dependencies saved to `package.json` to be configured with an exact version 
 
 2. Add the following content and save it.
 
-```sh
-save-exact=true
-```
+   ```ini
+   save-exact=true
+   ```
 
 ## 3. EditorConfig, Formatters and Linters
 
