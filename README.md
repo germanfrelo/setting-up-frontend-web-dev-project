@@ -155,6 +155,8 @@ This creates a `package.json` file like this:
 }
 ```
 
+### `.npmrc`
+
 Set dependencies saved to `package.json` to be configured with an exact version rather than using npm's default semver range operator:
 
 1. Create a file named `.npmrc` in the root of the project.
@@ -162,6 +164,7 @@ Set dependencies saved to `package.json` to be configured with an exact version 
 2. Add the following content and save it.
 
    ```ini
+   # Dependencies saved to package.json will be configured with an exact version rather than using npm's default semver range operator
    save-exact=true
    ```
 
