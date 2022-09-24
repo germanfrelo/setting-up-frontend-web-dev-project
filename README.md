@@ -1,27 +1,29 @@
-# Setting up a front-end web dev project
+# How I set up a simple front-end web devevelopment project
+
+**This is a work in progress.**
 
 ## Table of Contents
 
-- [1. Git](#1-git)
+- [**1. Git**](#1-git)
   - [1.1. Initialize a Git repository](#11-initialize-a-git-repository)
   - [1.2. Ignore files](#12-ignore-files)
   - [1.3. Normalize line endings](#13-normalize-line-endings)
-- [2. npm package](#2-npm-package)
-- [3. EditorConfig, Formatters and Linters](#3-editorconfig-formatters-and-linters)
-  - [3.1. EditorConfig](#31-editorconfig)
-    - [3.1.1. Installation](#311-installation)
-    - [3.1.2. Configuration](#312-configuration)
-  - [3.2. Prettier](#32-prettier)
+- [**2. npm package**](#2-npm-package)
+- [**3. EditorConfig, Formatters and Linters**](#3-editorconfig-formatters-and-linters)
+  - [**3.1. EditorConfig**](#31-editorconfig)
+    - [3.1.1. The code editor plugin](#311-the-code-editor-plugin)
+    - [3.1.2. The *per-repository, local* file](#312-the-per-repository-local-file)
+  - [**3.2. Prettier**](#32-prettier)
     - [3.2.1. Installation](#321-installation)
-  - [3.3. Stylelint](#33-stylelint)
+  - [**3.3. Stylelint**](#33-stylelint)
     - [3.3.1. Installation](#331-installation)
     - [3.3.2. Configuration](#332-configuration)
-  - [3.4. ESLint](#34-eslint)
+  - [**3.4. ESLint**](#34-eslint)
     - [3.4.1. Installation](#341-installation)
     - [3.4.2. Configuration](#342-configuration)
-  - [3.5. EditorConfig and Prettier](#35-editorconfig-and-prettier)
-  - [3.6. Prettier and Stylelint](#36-prettier-and-stylelint)
-  - [3.7. Prettier and ESLint](#37-prettier-and-eslint)
+  - [**3.5. EditorConfig and Prettier**](#35-editorconfig-and-prettier)
+  - [**3.6. Prettier and Stylelint**](#36-prettier-and-stylelint)
+  - [**3.7. Prettier and ESLint**](#37-prettier-and-eslint)
 
 ## 1. Git
 
@@ -33,9 +35,9 @@ In the **root of the project directory**, execute:
 
 ```sh
 git init
-
-# Output: Initialized empty Git repository in /[...]/.git/
 ```
+
+Output: `Initialized empty Git repository in /[...]/.git/`
 
 ### 1.2. Ignore files
 
