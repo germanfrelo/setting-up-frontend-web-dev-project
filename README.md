@@ -454,37 +454,6 @@ Then run:
 npm run stylelint-check
 ```
 
-#### 5.2.4. Rules to override
-
-These are the rules that I add to override the corresponding ones in existing configurations:
-
-```json
-"rules": {
-    "custom-media-pattern": null,
-    "custom-property-pattern": null,
-    "keyframes-name-pattern": null,
-    "selector-class-pattern": null,
-    "selector-id-pattern": null,
-    "value-keyword-case": [
-        "lower",
-        {
-            "ignoreKeywords": [
-                "Arial",
-                "Consolas",
-                "Helvetica",
-                "Menlo",
-                "Roboto",
-                "SFMono-Regular"
-            ],
-            "ignoreProperties": [
-                "--ff-sans",
-                "--ff-mono"
-            ]
-        }
-    ]
-}
-```
-
 ### 5.3. Usage
 
 On the command line using an npm script.
