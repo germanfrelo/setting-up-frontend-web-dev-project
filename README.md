@@ -322,7 +322,18 @@ It's also recommended to use a [Stylelint extension for the code editor](https:/
 
 Create a `.stylelintrc.json` configuration file in the root of the project.
 
+#### Rules
+
+3 categories:
+
+- Rules that **[avoid errors](https://stylelint.io/user-guide/rules#avoid-errors)**
+- Rules that **[enforce non-stylistic conventions](https://stylelint.io/user-guide/rules#enforce-non-stylistic-conventions)**
+- Rules that **[enforce stylistic conventions](https://stylelint.io/user-guide/rules#enforce-stylistic-conventions)** (frozen: will be deprecated and removed; use Prettier instead)
+
+> **Note**
 > No rules are turned on by default and there are no default values. You must explicitly configure each rule to turn it on.
+
+#### Existing configurations
 
 There is a [list of existing configurations](https://github.com/stylelint/awesome-stylelint#configs) that turn on some rules.
 
@@ -334,34 +345,38 @@ To use (_extend_) one (or more), first add an `"extends"` array to `.stylelintrc
 }
 ```
 
-Then, add the existing configuration(s) to the array. The configurations that I use are (in this order):
-
-1. `stylelint-config-standard`
-2. `stylelint-config-recess-order`
-3. `stylelint-config-prettier`
+Then, add the existing configuration(s) to the array.
 
 > **Warning**
 > The order matters! Each item in the array takes precedence over the previous item (so the second item overrides rules in the first, the third item overrides rules in the first and the second, and so on; the last item overrides everything else).
 
-#### 5.2.1. Standard configuration
+The configurations that I use are:
 
-> Extends recommended one by turning on rules that enforce conventions.
+1. **[`stylelint-config-recommended`](https://www.npmjs.com/package/stylelint-config-recommended)**: turns on just [all the rules that avoid errors](https://github.com/stylelint/stylelint-config-recommended/blob/main/index.js).
+2. **[`stylelint-config-standard`](https://www.npmjs.com/package/stylelint-config-standard)**: extends recommended one (with rules that just avoid errors) by turning on [rules that enforce (non-stylistic) conventions](https://github.com/stylelint/stylelint-config-standard/blob/main/index.js).
+3. **[`stylelint-config-recess-order`](https://www.npmjs.com/package/stylelint-config-recess-order)**: sorts CSS properties the way Recess did and Bootstrap did/does (with some modifications & additions for modern properties).
+4. **[`stylelint-config-prettier`](https://www.npmjs.com/package/stylelint-config-prettier)**: turns off all Stylelint rules that are unnecessary or might conflict with Prettier ([stylistic rules](https://stylelint.io/user-guide/rules/#enforce-stylistic-conventions)). Besides, it's shipped with a CLI tool to check that: [prettier/stylelint-config-prettier#cli-helper-tool](https://github.com/prettier/stylelint-config-prettier#cli-helper-tool).
 
-Install [`stylelint-config-standard`](https://www.npmjs.com/package/stylelint-config-standard) in the root of the project (locally, as a dev dependency, and with its version pinned):
+Install them in the root of the project (locally, as dev dependencies, and with its version pinned):
 
 ```sh
-npm install -D -E stylelint-config-standard
+npm install -D -E stylelint-config-recommended stylelint-config-standard stylelint-config-recess-order stylelint-config-prettier
 ```
 
-Then, add `"stylelint-config-standard"` to the `"extends"` array in `.stylelintrc.json`:
+Then, add them to the `"extends"` array in `.stylelintrc.json` (**in this exact order**):
 
 ```json
 {
     "extends": [
-        "stylelint-config-standard"
+        "stylelint-config-recommended",
+        "stylelint-config-standard",
+        "stylelint-config-recess-order",
+        "stylelint-config-prettier",
     ]
 }
 ```
+
+Make sure to put `stylelint-config-prettier` **last**, so it will override other configs.
 
 Rules to override:
 
@@ -392,66 +407,6 @@ Rules to override:
         }
     ]
 }
-```
-
-#### 5.2.2. Sorts CSS properties
-
-> Sorts CSS properties the way Recess did and Bootstrap did/does. *With some modifications & additions for modern properties.
-
-Install [`stylelint-config-recess-order`](https://www.npmjs.com/package/stylelint-config-recess-order) in the root of the project (locally, as a dev dependency, and with its version pinned):
-
-```sh
-npm install -D -E stylelint-config-recess-order
-```
-
-Then, add `"stylelint-config-recess-order"` to the `"extends"` array in `.stylelintrc.json`:
-
-```json
-{
-    "extends": [
-        "...",
-        "stylelint-config-recess-order"
-    ]
-}
-```
-
-#### 5.2.3. Stylelint and Prettier
-
-Last but not least...
-
-> Turn off all Stylelint rules that are unnecessary or might conflict with Prettier ([stylistic rules](https://stylelint.io/user-guide/rules/#enforce-stylistic-conventions)).
-
-Install [`stylelint-config-prettier`](https://www.npmjs.com/package/stylelint-config-prettier) in the root of the project (locally, as a dev dependency, and with its version pinned):
-
-```sh
-npm install -D -E stylelint-config-prettier
-```
-
-Then, append `"stylelint-config-prettier"` to the `"extends"` array in `.stylelintrc.json`. Make sure to put it **last**, so it will override other configs:
-
-```json
-{
-    "extends": [
-      "...",
-      "stylelint-config-prettier"
-    ]
-}
-```
-
-This config is shipped with a CLI tool to check if the Stylelint configuration contains any rules that are in conflict with Prettier.
-
-Add the following script to `package.json`:
-
-```json
-"scripts": {
-    "stylelint-check": "stylelint-config-prettier-check"
-}
-```
-
-Then run:
-
-```sh
-npm run stylelint-check
 ```
 
 ### 5.3. Usage
