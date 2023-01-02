@@ -314,7 +314,7 @@ npm install -D -E stylelint
 
 #### Editor integrations
 
-It's also recommended to use the [Stylelint extension for the code editor](https://stylelint.io/user-guide/integrations/editor).
+It's also recommended to use a [Stylelint extension for the code editor](https://stylelint.io/user-guide/integrations/editor).
 
 - For VS Code: [my installation and configuration of the Stylelint extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#stylelint-extension-for-vscode).
 
@@ -324,11 +324,24 @@ Create a `.stylelintrc.json` configuration file in the root of the project.
 
 > No rules are turned on by default and there are no default values. You must explicitly configure each rule to turn it on.
 
-There is a [list of existing configurations](https://github.com/stylelint/awesome-stylelint#configs) that turn on some rules. The ones that I use are:
+There is a [list of existing configurations](https://github.com/stylelint/awesome-stylelint#configs) that turn on some rules.
 
-- [`stylelint-config-standard`](https://www.npmjs.com/package/stylelint-config-standard)
-- [`stylelint-config-recess-order`](https://www.npmjs.com/package/stylelint-config-recess-order)
-- [`stylelint-config-prettier`](https://www.npmjs.com/package/stylelint-config-prettier)
+To use (_extend_) one (or more), first add an `"extends"` array to `.stylelintrc.json`:
+
+```json
+{
+    "extends": []
+}
+```
+
+Then, add the existing configuration(s) to the array. The configurations that I use are (in this order):
+
+1. `stylelint-config-standard`
+2. `stylelint-config-recess-order`
+3. `stylelint-config-prettier`
+
+> **Warning**
+> The order matters! Each item in the array takes precedence over the previous item (so the second item overrides rules in the first, the third item overrides rules in the first and the second, and so on; the last item overrides everything else).
 
 #### 5.2.1. Standard configuration
 
@@ -350,7 +363,7 @@ Then, add `"stylelint-config-standard"` to the `"extends"` array in `.stylelintr
 }
 ```
 
-#### 5.2.2. Recess order
+#### 5.2.2. Sorts CSS properties
 
 > Sorts CSS properties the way Recess did and Bootstrap did/does. *With some modifications & additions for modern properties.
 
@@ -373,7 +386,9 @@ Then, add `"stylelint-config-recess-order"` to the `"extends"` array in `.stylel
 
 #### 5.2.3. Stylelint and Prettier
 
-Last but not least, turn off all Stylelint rules that are unnecessary or might conflict with Prettier.
+Last but not least...
+
+> Turn off all Stylelint rules that are unnecessary or might conflict with Prettier.
 
 Install [`stylelint-config-prettier`](https://www.npmjs.com/package/stylelint-config-prettier) in the root of the project (locally, as a dev dependency, and with its version pinned):
 
@@ -381,7 +396,7 @@ Install [`stylelint-config-prettier`](https://www.npmjs.com/package/stylelint-co
 npm install -D -E stylelint-config-prettier
 ```
 
-Then, append `"stylelint-config-prettier"` to the `"extends"` array in the `.stylelintrc.json` file. Make sure to put it **last**, so it will override other configs:
+Then, append `"stylelint-config-prettier"` to the `"extends"` array in `.stylelintrc.json`. Make sure to put it **last**, so it will override other configs:
 
 ```json
 {
@@ -402,7 +417,7 @@ Add the following script to `package.json`:
 }
 ```
 
-The, run:
+Then run:
 
 ```sh
 npm run stylelint-check
@@ -410,15 +425,21 @@ npm run stylelint-check
 
 #### 5.2.4. Rules to override
 
-These are the rules that I use to override the existing configurations:
+These are the rules that I add to override the corresponding ones in existing configurations:
 
 ```json
 "rules": {
     "indentation": "tab",
-    "no-missing-end-of-source-newline": null,
     "custom-media-pattern": null,
     "custom-property-pattern": null,
     "keyframes-name-pattern": null,
+    "max-line-length": [
+        120,
+        {
+            "ignorePattern": []
+        }
+    ],
+    "no-missing-end-of-source-newline": null,
     "selector-class-pattern": null,
     "selector-id-pattern": null,
     "value-keyword-case": [
@@ -436,12 +457,6 @@ These are the rules that I use to override the existing configurations:
                 "--ff-sans",
                 "--ff-mono"
             ]
-        }
-    ],
-    "max-line-length": [
-        120,
-        {
-            "ignorePattern": []
         }
     ]
 }
@@ -485,24 +500,10 @@ Install and configure [the ESLint plugin/extension for your Code Editor](https:/
 
 **Step 2:**
 
-Install ESLint in the project (locally, as a dev dependency, and with its version pinned):
-
-> **Note**
->
-> **Prerequisites: [a `package.json` file](#2-npm-package).**
+Install ESLint in the root of the project (locally, as a dev dependency, and with its version pinned):
 
 ```sh
-npm install eslint --save-dev --save-exact
-```
-
-Verify that it is added as `devDependencies` in the `package.json` file:
-
-```json
-{
-    "devDependencies": {
-        "eslint": "x.x.x"
-    }
-}
+npm install -D -E eslint
 ```
 
 ### 6.2. Configuration
