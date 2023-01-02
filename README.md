@@ -363,6 +363,37 @@ Then, add `"stylelint-config-standard"` to the `"extends"` array in `.stylelintr
 }
 ```
 
+Rules to override:
+
+```json
+"rules": {
+    "custom-media-pattern": null, // no kebab-case
+    "custom-property-pattern": null, // no kebab-case
+    "indentation": null,
+    "keyframes-name-pattern": null, // no kebab-case
+    "max-line-length": null,
+    "selector-class-pattern": null, // no kebab-case
+    "selector-id-pattern": null, // no kebab-case
+    "value-keyword-case": [
+        "lower",
+        {
+            "ignoreKeywords": [
+                "Arial",
+                "Consolas",
+                "Helvetica",
+                "Menlo",
+                "Roboto",
+                "SFMono-Regular"
+            ],
+            "ignoreProperties": [
+                "--ff-sans",
+                "--ff-mono"
+            ]
+        }
+    ]
+}
+```
+
 #### 5.2.2. Sorts CSS properties
 
 > Sorts CSS properties the way Recess did and Bootstrap did/does. *With some modifications & additions for modern properties.
@@ -388,7 +419,7 @@ Then, add `"stylelint-config-recess-order"` to the `"extends"` array in `.stylel
 
 Last but not least...
 
-> Turn off all Stylelint rules that are unnecessary or might conflict with Prettier.
+> Turn off all Stylelint rules that are unnecessary or might conflict with Prettier ([stylistic rules](https://stylelint.io/user-guide/rules/#enforce-stylistic-conventions)).
 
 Install [`stylelint-config-prettier`](https://www.npmjs.com/package/stylelint-config-prettier) in the root of the project (locally, as a dev dependency, and with its version pinned):
 
@@ -429,17 +460,9 @@ These are the rules that I add to override the corresponding ones in existing co
 
 ```json
 "rules": {
-    "indentation": "tab",
     "custom-media-pattern": null,
     "custom-property-pattern": null,
     "keyframes-name-pattern": null,
-    "max-line-length": [
-        120,
-        {
-            "ignorePattern": []
-        }
-    ],
-    "no-missing-end-of-source-newline": null,
     "selector-class-pattern": null,
     "selector-id-pattern": null,
     "value-keyword-case": [
