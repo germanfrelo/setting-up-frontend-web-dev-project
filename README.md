@@ -1,8 +1,8 @@
-# My front-end web dev tools to start simple projects
+# My setting up for simple front-end projects
 
 > **Warning**
 >
-> **WIP**
+> **Work in progress** 🚧
 
 ## Table of Contents
 
@@ -16,15 +16,15 @@
 - [**3. EditorConfig**](#3-editorconfig)
   - [3.1. The code editor plugin](#31-the-code-editor-plugin)
   - [3.2. The *per-repository, local* file](#32-the-per-repository-local-file)
-- [**4. Prettier**](#4-prettier)
+- [**4. Code formatter: Prettier**](#4-code-formatter-prettier)
   - [4.1. Installation](#41-installation)
   - [4.2. Prettier and EditorConfig](#42-prettier-and-editorconfig)
   - [4.3. Usage](#43-usage)
-- [**5. Stylelint**](#5-stylelint)
+- [**5. CSS linter: Stylelint**](#5-css-linter-stylelint)
   - [5.1. Installation](#51-installation)
   - [5.2. Configuration](#52-configuration)
   - [5.3. Usage](#53-usage)
-- [**6. ESLint**](#6-eslint)
+- [**6. JavaScript linter: ESLint**](#6-javascript-linter-eslint)
   - [6.1. Installation](#61-installation)
   - [6.2. Configuration](#62-configuration)
   - [6.3. Usage](#63-usage)
@@ -218,7 +218,7 @@ This is the list of [EditorConfig properties](https://editorconfig-specification
 
 See **[my local `.editorconfig` file](https://gist.github.com/germanfrelo/a71698d5c4592220a0fa4915f32182ce)**.
 
-## 4. Prettier
+## 4. Code formatter: Prettier
 
 [prettier.io](https://prettier.io)
 
@@ -298,21 +298,13 @@ If you wish to change the configuration, **the rule is to check whether it is a 
 
 ### 4.3. Usage
 
-[ ] To-do
+- [ ] To-do
 
-## 5. Stylelint
+## 5. CSS linter: Stylelint
 
-[stylelint.io](https://stylelint.io)
+[Stylelint](https://stylelint.io).
 
 ### 5.1. Installation
-
-**Code editor plugin/extension:**
-
-Install and configure [the Stylelint plugin/extension for your code editor](https://stylelint.io/user-guide/integrations/editor):
-
-- For Visual Studio Code: [my installation and configuration of the Stylelint extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#stylelint-extension-for-vscode).
-
-**Stylelint:**
 
 Install Stylelint in the root of the project (locally, as a dev dependency, and with its version pinned):
 
@@ -320,17 +312,35 @@ Install Stylelint in the root of the project (locally, as a dev dependency, and 
 npm install -D -E stylelint
 ```
 
+#### Editor integrations
+
+It's also recommended to use the [Stylelint extension for the code editor](https://stylelint.io/user-guide/integrations/editor).
+
+- For VS Code: [my installation and configuration of the Stylelint extension for VS Code](https://github.com/germanfrelo/my-frontend-web-development-setup#stylelint-extension-for-vscode).
+
 ### 5.2. Configuration
+
+Create a `.stylelintrc.json` configuration file in the root of the project.
+
+> No rules are turned on by default and there are no default values. You must explicitly configure each rule to turn it on.
+
+There is a [list of existing configurations](https://github.com/stylelint/awesome-stylelint#configs) that turn on some rules. The ones that I use are:
+
+- [`stylelint-config-standard`](https://www.npmjs.com/package/stylelint-config-standard)
+- [`stylelint-config-recess-order`](https://www.npmjs.com/package/stylelint-config-recess-order)
+- [`stylelint-config-prettier`](https://www.npmjs.com/package/stylelint-config-prettier)
 
 #### 5.2.1. Standard configuration
 
-Install the [Stylelint standard configuration](https://github.com/stylelint/stylelint-config-standard) in the root of the project (locally, as a dev dependency, and with its version pinned):
+> Extends recommended one by turning on rules that enforce conventions.
+
+Install [`stylelint-config-standard`](https://www.npmjs.com/package/stylelint-config-standard) in the root of the project (locally, as a dev dependency, and with its version pinned):
 
 ```sh
 npm install -D -E stylelint-config-standard
 ```
 
-Create a `.stylelintrc.json` configuration file in the root of the project with the following content:
+Then, add `"stylelint-config-standard"` to the `"extends"` array in `.stylelintrc.json`:
 
 ```json
 {
@@ -342,124 +352,128 @@ Create a `.stylelintrc.json` configuration file in the root of the project with 
 
 #### 5.2.2. Recess order
 
-**To sort CSS properties (<https://github.com/stormwarning/stylelint-config-recess-order>)**
+> Sorts CSS properties the way Recess did and Bootstrap did/does. *With some modifications & additions for modern properties.
 
-1. Installation
-
-    ```sh
-    npm install --save-dev --save-exact stylelint-config-recess-order
-    ```
-
-2. Configuration
-
-    In the `.stylelintrc.json` file:
-
-    Add the following content to *extend* the **Recess Property Order** configuration:
-
-    ```json
-    "extends": [
-        "stylelint-config-recess-order"
-    ]
-    ```
-
-    Add these rules to override the existing configurations:
-
-    ```json
-    "rules": {
-        "indentation": "tab",
-        "no-missing-end-of-source-newline": null,
-        "custom-media-pattern": null,
-        "custom-property-pattern": null,
-        "keyframes-name-pattern": null,
-        "selector-class-pattern": null,
-        "selector-id-pattern": null,
-        "value-keyword-case": [
-            "lower",
-            {
-                "ignoreKeywords": [
-                    "Arial",
-                    "Consolas",
-                    "Helvetica",
-                    "Menlo",
-                    "Roboto",
-                    "SFMono-Regular"
-                ],
-                "ignoreProperties": [
-                    "--ff-sans",
-                    "--ff-mono"
-                ]
-            }
-        ],
-        "max-line-length": [
-            120,
-            {
-                "ignorePattern": []
-            }
-        ]
-    }
-    ```
-
-#### 5.2.3. Stylelint and Prettier
-
-Turn off all Stylelint rules that are unnecessary or might conflict with Prettier (code formatting rules).
-
-**Step 1:**
-
-Install the Prettier's [`stylelint-config-prettier`](https://github.com/prettier/stylelint-config-prettier) package in the project (locally, as a dev dependency, and with its version pinned):
+Install [`stylelint-config-recess-order`](https://www.npmjs.com/package/stylelint-config-recess-order) in the root of the project (locally, as a dev dependency, and with its version pinned):
 
 ```sh
-npm install stylelint-config-prettier --save-dev --save-exact
+npm install -D -E stylelint-config-recess-order
 ```
 
-Then, verify that it is added as `devDependencies` in the `package.json` file:
+Then, add `"stylelint-config-recess-order"` to the `"extends"` array in `.stylelintrc.json`:
 
 ```json
 {
-    "devDependencies": {
-        "prettier": "x.x.x",
-        "stylelint-config-prettier": "x.x.x",
-    }
+    "extends": [
+        "...",
+        "stylelint-config-recess-order"
+    ]
 }
 ```
 
-Then, append `stylelint-config-prettier` to the extends array in your `.stylelintrc.*` file. Make sure to put it **last**, so it will override other configs:
+#### 5.2.3. Stylelint and Prettier
+
+Last but not least, turn off all Stylelint rules that are unnecessary or might conflict with Prettier.
+
+Install [`stylelint-config-prettier`](https://www.npmjs.com/package/stylelint-config-prettier) in the root of the project (locally, as a dev dependency, and with its version pinned):
+
+```sh
+npm install -D -E stylelint-config-prettier
+```
+
+Then, append `"stylelint-config-prettier"` to the `"extends"` array in the `.stylelintrc.json` file. Make sure to put it **last**, so it will override other configs:
 
 ```json
 {
     "extends": [
-      // other configs ...
+      "...",
       "stylelint-config-prettier"
+    ]
+}
+```
+
+This config is shipped with a CLI tool to check if the Stylelint configuration contains any rules that are in conflict with Prettier.
+
+Add the following script to `package.json`:
+
+```json
+"scripts": {
+    "stylelint-check": "stylelint-config-prettier-check"
+}
+```
+
+The, run:
+
+```sh
+npm run stylelint-check
+```
+
+#### 5.2.4. Rules to override
+
+These are the rules that I use to override the existing configurations:
+
+```json
+"rules": {
+    "indentation": "tab",
+    "no-missing-end-of-source-newline": null,
+    "custom-media-pattern": null,
+    "custom-property-pattern": null,
+    "keyframes-name-pattern": null,
+    "selector-class-pattern": null,
+    "selector-id-pattern": null,
+    "value-keyword-case": [
+        "lower",
+        {
+            "ignoreKeywords": [
+                "Arial",
+                "Consolas",
+                "Helvetica",
+                "Menlo",
+                "Roboto",
+                "SFMono-Regular"
+            ],
+            "ignoreProperties": [
+                "--ff-sans",
+                "--ff-mono"
+            ]
+        }
+    ],
+    "max-line-length": [
+        120,
+        {
+            "ignorePattern": []
+        }
     ]
 }
 ```
 
 ### 5.3. Usage
 
-- **Option 1:**  CLI
+On the command line using an npm script.
 
-    ```sh
-    npx stylelint "**/*.css"
-    ```
+First, create the script in `package.json`:
 
-- **Option 2:**  Script
+> **Note**:
+> `\"` is needed to escape the quotation marks around file globs.
 
-    Add this to the `package.json` file:
+```json
+"scripts": {
+    "lint:css": "stylelint \"**/*.css\" --formatter verbose"
+}
+```
 
-    ```json
-    "scripts": {
-        "lint:css": "npx stylelint \"**/*.css\" --formatter verbose"
-    }
-    ```
+> **Note**:
+> The [`--formatter` option](https://stylelint.io/user-guide/usage/options#formatter) is optional.
 
-    Run:
+Then, run the script command on the CLI:
 
-    ```sh
-    npm run lint:css
-    ```
+```sh
+npm run lint:css
+```
 
-## 6. ESLint
+## 6. JavaScript linter: ESLint
 
-[eslint.org](https://eslint.org)
+[ESLint](https://eslint.org).
 
 ### 6.1. Installation
 
