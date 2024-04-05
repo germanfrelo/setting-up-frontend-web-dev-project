@@ -1,32 +1,35 @@
-# My setting up for simple front-end projects
+# My setting up for simple front-end projects <!-- omit from toc -->
 
-> **Warning**
->
-> **Work in progress** 🚧
+> [!NOTE]
+> This is a **work in progress**.
 
-## Table of Contents
+## Table of Contents <!-- omit from toc -->
 
-- [**0. About formatters and linters**](#0-about-formatters-and-linters)
-- [**1. Git**](#1-git)
+- [0. About formatters and linters](#0-about-formatters-and-linters)
+- [1. Git](#1-git)
   - [1.1. Initialize a Git repository](#11-initialize-a-git-repository)
   - [1.2. Ignore files](#12-ignore-files)
   - [1.3. Normalize line endings](#13-normalize-line-endings)
-- [**2. npm package**](#2-npm-package)
-  - [2.1. npmrc](#21-npmrc)
-- [**3. EditorConfig**](#3-editorconfig)
+- [2. npm package](#2-npm-package)
+  - [2.1. `.npmrc`](#21-npmrc)
+- [3. EditorConfig](#3-editorconfig)
   - [3.1. The code editor plugin](#31-the-code-editor-plugin)
   - [3.2. The *per-repository, local* file](#32-the-per-repository-local-file)
-- [**4. Code formatter: Prettier**](#4-code-formatter-prettier)
+- [4. Code formatter: Prettier](#4-code-formatter-prettier)
   - [4.1. Installation](#41-installation)
   - [4.2. Prettier and EditorConfig](#42-prettier-and-editorconfig)
   - [4.3. Usage](#43-usage)
-- [**5. CSS linter: Stylelint**](#5-css-linter-stylelint)
+- [5. CSS linter: Stylelint](#5-css-linter-stylelint)
   - [5.1. Installation](#51-installation)
+    - [Editor integrations](#editor-integrations)
   - [5.2. Configuration](#52-configuration)
+    - [Rules](#rules)
+    - [Existing configurations](#existing-configurations)
   - [5.3. Usage](#53-usage)
-- [**6. JavaScript linter: ESLint**](#6-javascript-linter-eslint)
+- [6. JavaScript linter: ESLint](#6-javascript-linter-eslint)
   - [6.1. Installation](#61-installation)
   - [6.2. Configuration](#62-configuration)
+    - [6.2.1. ESLint and Prettier](#621-eslint-and-prettier)
   - [6.3. Usage](#63-usage)
 
 ## 0. About formatters and linters
@@ -143,7 +146,7 @@ Output: `Initialized empty Git repository in /[...]/.git/`
 npm docs reference:
 [https://docs.npmjs.com/cli/v8/commands/npm-init](https://docs.npmjs.com/cli/v8/commands/npm-init)
 
-Set up a new npm package in the root of the project diectory:
+Set up a new npm package in the root of the project directory:
 
 ```sh
 npm init
@@ -216,7 +219,7 @@ Create an `.editorconfig` file in the root of the repository. This file:
 
 This is the list of [EditorConfig properties](https://editorconfig-specification.readthedocs.io/#supported-pairs).
 
-See **[my local `.editorconfig` file](https://gist.github.com/germanfrelo/a71698d5c4592220a0fa4915f32182ce)**.
+➡️ See **[my local `.editorconfig` file](https://gist.github.com/germanfrelo/a71698d5c4592220a0fa4915f32182ce)**.
 
 ## 4. Code formatter: Prettier
 
@@ -337,7 +340,7 @@ Create a `.stylelintrc.json` configuration file in the root of the project.
 
 There is a [list of existing configurations](https://github.com/stylelint/awesome-stylelint#configs) that turn on some rules.
 
-To use (_extend_) one (or more), first add an `"extends"` array to `.stylelintrc.json`:
+To use (*extend*) one (or more), first add an `"extends"` array to `.stylelintrc.json`:
 
 ```json
 {
