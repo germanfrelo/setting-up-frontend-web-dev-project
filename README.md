@@ -1,7 +1,7 @@
 # My setting up for simple front-end projects <!-- omit from toc -->
 
 > [!NOTE]
-> This is a **work in progress**.
+> This repository is **archived**. It has been converted to a template repository: <https://github.com/germanfrelo/template>.
 
 ## Table of Contents <!-- omit from toc -->
 
